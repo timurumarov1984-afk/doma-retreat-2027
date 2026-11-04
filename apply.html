@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ru" data-lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Анкета участника · Ретрит с Мастером в DOMA · 9–17 мая 2027</title>
+  <meta name="description" content="Анкета участника ретрита с Мастером Камильпашой в DOMA, 9–17 мая 2027.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#efe6d8">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232d3226'/%3E%3Cpath d='M9 26V15a7 7 0 0 1 14 0v11' fill='none' stroke='%23f7f2ea' stroke-width='2'/%3E%3Ccircle cx='16' cy='17' r='3' fill='%23f7f2ea'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/apply.css">
+
+  <script>
+    (function () {
+      var d = document.documentElement, l = null;
+      d.classList.add('js');
+      try { l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('lang'); } catch (e) {}
+      if (l === 'en' || l === 'ru') { d.setAttribute('data-lang', l); d.setAttribute('lang', l); }
+    })();
+  </script>
+</head>
+
+<body class="apply-page">
+  <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-logo" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+      <path d="M7 28V15a9 9 0 0 1 18 0v13"/><path d="M3.5 28h25"/><circle cx="16" cy="18" r="3.4"/><path d="M16 10.4v1.8M11.3 12.6l1.2 1.2M20.7 12.6l-1.2 1.2"/>
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 12h15M13 6l6 6-6 6"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12.5l4.5 4.5L19 7.5"/>
+    </symbol>
+  </svg>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="apply-header">
+    <div class="container apply-header__inner">
+      <a class="brand" href="index.html" aria-label="Master's Retreat · DOMA">
+        <svg aria-hidden="true"><use href="#i-logo"/></svg>
+        <span>
+          <span class="brand__name">Master’s Retreat</span>
+          <span class="brand__sub">DOMA · Portugal · 2027</span>
+        </span>
+      </a>
+      <div class="apply-header__actions">
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" data-set-lang="ru" aria-pressed="true">RU</button>
+          <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="apply-back" href="index.html">
+          <svg aria-hidden="true"><use href="#i-arrow"/></svg>
+          <span lang="ru">На сайт</span><span lang="en">Back to site</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container apply">
+    <!-- ===================== ASIDE ===================== -->
+    <aside class="apply__aside">
+      <p class="kicker"><span lang="ru">Анкета участника</span><span lang="en">Application</span></p>
+      <h1>
+        <span lang="ru">Заявка <em>на&nbsp;ретрит</em></span>
+        <span lang="en">Apply for <em>the retreat</em></span>
+      </h1>
+      <p class="apply__meta">
+        <span lang="ru">9–17 мая 2027 · DOMA, Мафра, Португалия</span>
+        <span lang="en">9–17 May 2027 · DOMA, Mafra, Portugal</span>
+      </p>
+      <p class="apply__intro">
+        <span lang="ru">Заполни анкету максимально подробно и&nbsp;осознанно. После неё команда организаторов свяжется с&nbsp;тобой по&nbsp;почте или в&nbsp;Telegram.</span>
+        <span lang="en">Please fill in the form as fully and thoughtfully as you can. The organising team will then contact you by email or Telegram.</span>
+      </p>
+
+      <ol class="steps-nav" aria-label="Steps"></ol>
+
+      <figure class="apply__photo arch">
+        <img src="assets/img/retreat/06.webp" width="700" height="1050" alt="" loading="lazy">
+      </figure>
+    </aside>
+
+    <!-- ===================== FORM ===================== -->
+    <section class="form-card" aria-live="polite">
+      <div class="progress" aria-hidden="true"><span></span></div>
+
+      <form id="apply-form" novalidate>
+        <!-- шаги рендерит assets/js/apply.js из списка вопросов -->
+      </form>
+
+      <div class="form-state form-state--success" hidden>
+        <div class="form-state__icon"><svg aria-hidden="true"><use href="#i-check"/></svg></div>
+        <h2>
+          <span lang="ru">Спасибо, заявка отправлена!</span>
+          <span lang="en">Thank you, your application is in!</span>
+        </h2>
+        <p lang="ru">Очень рады тебе, дорогой друг! Команда организаторов свяжется с&nbsp;тобой по&nbsp;почте или в&nbsp;Telegram. С&nbsp;каждым новичком мы знакомимся лично — это короткий разговор перед подтверждением участия.</p>
+        <p lang="en">We’re so glad you’re here! The organising team will contact you by email or Telegram. We have a short personal conversation with every newcomer before confirming their place.</p>
+        <a class="btn btn--lg" href="index.html">
+          <span lang="ru">Вернуться на сайт</span><span lang="en">Back to the site</span>
+          <svg aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+      </div>
+
+      <div class="form-state form-state--error" hidden>
+        <h2>
+          <span lang="ru">Не получилось отправить</span>
+          <span lang="en">Couldn’t send the form</span>
+        </h2>
+        <p lang="ru">Проверь подключение к интернету и попробуй ещё раз. Ответы сохранились. Если не выходит — заполни <a href="https://docs.google.com/forms/d/e/1FAIpQLScufP0JZy3R-6JEgpHcbot98bKMqCGhywQrjM5NU0Y8SmFUuQ/viewform" target="_blank" rel="noopener">Google-форму</a> или напиши на <a href="mailto:noda.connect@gmail.com">noda.connect@gmail.com</a>.</p>
+        <p lang="en">Please check your connection and try again — your answers are saved. If it still fails, use the <a href="https://docs.google.com/forms/d/e/1FAIpQLScufP0JZy3R-6JEgpHcbot98bKMqCGhywQrjM5NU0Y8SmFUuQ/viewform" target="_blank" rel="noopener">Google Form</a> or email <a href="mailto:noda.connect@gmail.com">noda.connect@gmail.com</a>.</p>
+        <button class="btn" type="button" data-retry>
+          <span lang="ru">Попробовать ещё раз</span><span lang="en">Try again</span>
+        </button>
+      </div>
+
+      <noscript>
+        <p class="noscript">Для анкеты нужен JavaScript. Заполните, пожалуйста, <a href="https://docs.google.com/forms/d/e/1FAIpQLScufP0JZy3R-6JEgpHcbot98bKMqCGhywQrjM5NU0Y8SmFUuQ/viewform">Google-форму</a>.</p>
+      </noscript>
+    </section>
+  </main>
+
+  <footer class="apply-footer">
+    <div class="container">
+      <span lang="ru">Вопросы: <a href="mailto:noda.connect@gmail.com">noda.connect@gmail.com</a> · Отправляя анкету, вы принимаете <a href="https://docs.google.com/document/d/12V9Uu-iSyLV4jjdPl43FUXit8KJJa4iMa1bMrvaR1z4/edit?usp=sharing" target="_blank" rel="noopener">Условия и правила</a></span>
+      <span lang="en">Questions: <a href="mailto:noda.connect@gmail.com">noda.connect@gmail.com</a> · By applying you accept the <a href="https://docs.google.com/document/d/12V9Uu-iSyLV4jjdPl43FUXit8KJJa4iMa1bMrvaR1z4/edit?usp=sharing" target="_blank" rel="noopener">Terms and Rules</a></span>
+    </div>
+  </footer>
+
+  <script src="assets/js/apply.js" defer></script>
+</body>
+</html>

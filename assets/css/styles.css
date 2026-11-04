@@ -1480,3 +1480,33 @@ details[open] .plus::after { transform: translate(-50%, -50%) rotate(0deg); }
   .guide-card { grid-template-columns: 84px minmax(0, 1fr) auto; gap: 14px; }
   .guide-card__img { width: 84px; height: 84px; }
 }
+
+/* ==========================================================================
+   Mobile hero: the video stays visible — only the dates and the title sit on it,
+   buttons and facts move below the video
+   ========================================================================== */
+@media (max-width: 760px) {
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: min(80svh, 720px) auto;
+    min-height: 0;
+    align-items: end;
+    background: #171a13;
+  }
+  .hero__media { position: relative; inset: auto; grid-area: 1 / 1; height: 100%; }
+  .hero::before {
+    position: relative;
+    inset: auto;
+    grid-area: 1 / 1;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 18%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.82) 100%);
+  }
+  .hero__content { display: contents; }
+  .hero__headline { grid-area: 1 / 1; padding: 0 var(--gutter) 26px; }
+  .hero__headline h1 { margin-bottom: 0; }
+  .hero__lead { display: none; }
+  .hero__bottom { grid-area: 2 / 1; padding: 26px var(--gutter) 34px; }
+  .hero__bottom .hero__actions { margin-top: 0; }
+  .hero__facts { margin-top: 30px; }
+}

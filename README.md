@@ -6,6 +6,7 @@
 
 ```
 index.html              — главная страница (RU и EN тексты рядом)
+join.html / travel.html / faq.html — «Как попасть на ретрит», «Как добраться», «Частые вопросы»
 apply.html              — анкета участника (своя страница, ответы уходят в Google-форму)
 assets/css/styles.css   — оформление сайта (цвета — в начале файла, :root)
 assets/css/apply.css    — оформление анкеты
@@ -44,4 +45,7 @@ tools/make-hero.sh      — нарезка одного видео для пер
 
 ## Публикация
 
-Подойдёт любой бесплатный хостинг: перетащите папку на https://app.netlify.com/drop или подключите Vercel или GitHub Pages.
+Сайт опубликован на GitHub Pages: **https://timurumarov1984-afk.github.io/doma-retreat-2027/**
+(репозиторий `timurumarov1984-afk/doma-retreat-2027`).
+
+Чтобы обновить сайт после правок: `git add -A && git commit -m "…" && git push`. Ссылка обновится примерно через минуту.

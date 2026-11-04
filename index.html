@@ -57,7 +57,8 @@
   }
   </script>
 
-  <link rel="preload" as="image" href="assets/video/hero-poster.webp">
+  <link rel="preload" as="image" href="assets/video/hero-poster.webp" media="(min-aspect-ratio: 4/5)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/video/hero-poster-m.webp" media="(max-aspect-ratio: 4/5)" fetchpriority="high">
   <link rel="stylesheet" href="assets/css/styles.css">
 
   <!-- Pick the language before first paint: ?lang=en → saved choice → Russian -->
@@ -183,8 +184,12 @@
     <!-- ===================== HERO ===================== -->
     <section class="hero" aria-label="Retreat">
       <!-- ВИДЕОРЯД первого экрана: 1) общий план с дрона, 2–4) видео с ретрита. Файлы — assets/video/hero.mp4 (компьютер) и hero-mobile.mp4 (телефон) -->
-      <div class="hero__media">
-        <video autoplay muted loop playsinline preload="auto" poster="assets/video/hero-poster.webp" data-autoplay>
+      <div class="hero__media" style="--lqip-d:url(data:image/webp;base64,UklGRr4AAABXRUJQVlA4ILIAAACwBQCdASogABIAPwFqq06rJiOiMAgBYCAJYwC9WywYfs19Rh7iIxnVQ05GDVXEVPubQ8+f4wAA/suG49HPZb7bN0RmCCkzSpHhyXslfgagfapW5nJ+HAK+Y+qIgZLJf9arm/3Qc+iFQGIqYXrcWwyNPtKB1ByBO/PYJV0m0KiKTNvDD0BIUtJ+/2NBMFLA5kEymVfM7eihmgcUsG2lAQrrVaLwD915PNkt8rIXEmQTkgAA);--lqip-m:url(data:image/webp;base64,UklGRt4AAABXRUJQVlA4INIAAABQBQCdASoSACAAPwForE8rJaQiMAgBYCAJYwCo9Bo/E+n/46X8l4XQyPNTHZaQglH6ZzgA/rnKRd/vi9dkS8hwZ7SbQ+oLcsvsHTMdy8KBcVW+tKXX9jb/n0WOQzO4T4cXzlzb6qrxGw++hXfo2n/doVAMKbmOCOYd2sQQDGovkwyrY4iHGGH4/mQKeOTItQAOCRw053h0w03Kqu3QLXPwrv4r0mnf2swnM1IVd3xRcKRVQGMdHu896dbCf1OAOsekMrTimdfXU3BjGx8GAt6htAA=)">
+        <picture class="hero__poster">
+          <source media="(max-aspect-ratio: 4/5)" srcset="assets/video/hero-poster-m.webp">
+          <img src="assets/video/hero-poster.webp" width="1280" height="720" alt="" fetchpriority="high">
+        </picture>
+        <video autoplay muted loop playsinline preload="auto" data-autoplay>
           <source src="assets/video/hero-mobile.mp4" type="video/mp4" media="(max-aspect-ratio: 4/5)">
           <source src="assets/video/hero.mp4" type="video/mp4">
         </video>
@@ -286,7 +291,6 @@
           </figure>
           <p class="about__caption">
             <b><span lang="ru">Мастер Камильпаша</span><span lang="en">Master Kamilpasha</span></b>
-            <span lang="ru">ведёт утренние и вечерние практики</span><span lang="en">leads the morning and evening sessions</span>
           </p>
         </div>
       </div>

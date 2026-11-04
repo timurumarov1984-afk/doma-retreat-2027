@@ -109,6 +109,22 @@
     }, { threshold: 0.05 }).observe(video);
   });
 
+  /* ---------- Hero: show the video the moment it really plays ---------- */
+  var heroSection = document.querySelector('.hero');
+  var heroVideo = heroSection && heroSection.querySelector('video');
+  if (heroVideo) {
+    var heroShown = false;
+    var showHeroVideo = function () {
+      if (heroShown) return;
+      heroShown = true;
+      heroSection.classList.add('is-playing');
+    };
+    heroVideo.addEventListener('playing', showHeroVideo);
+    heroVideo.addEventListener('timeupdate', function () { if (heroVideo.currentTime > 0.04) showHeroVideo(); });
+    if (!heroVideo.paused && heroVideo.readyState >= 3) showHeroVideo();
+    if (!reduceMotion) { var pr = heroVideo.play(); if (pr && pr.catch) pr.catch(function () {}); }
+  }
+
   /* ---------- Gallery arrows ---------- */
   document.querySelectorAll('[data-scroll]').forEach(function (btn) {
     var track = document.querySelector(btn.dataset.target);

@@ -1510,3 +1510,28 @@ details[open] .plus::after { transform: translate(-50%, -50%) rotate(0deg); }
   .hero__bottom .hero__actions { margin-top: 0; }
   .hero__facts { margin-top: 30px; }
 }
+
+/* ==========================================================================
+   Hero start: instant blurred preview → first frame with a slow drone-like
+   pull-back → the video fades in as soon as it actually plays (no dark flash, no freeze)
+   ========================================================================== */
+.hero__media { overflow: hidden; background: #23261d; }
+.hero__media::before {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  background: var(--lqip-d) center / cover no-repeat;
+  filter: blur(18px);
+}
+@media (max-aspect-ratio: 4/5) { .hero__media::before { background-image: var(--lqip-m); } }
+.hero__poster,
+.hero__poster img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero__poster img {
+  object-fit: cover;
+  transform-origin: 50% 45%;
+  animation: hero-pullback 2.6s cubic-bezier(0.2, 0.6, 0.3, 1) both;
+}
+@keyframes hero-pullback { from { transform: scale(1.08); } to { transform: scale(1); } }
+.hero__media video { position: absolute; inset: 0; opacity: 0; transition: opacity 0.45s ease; }
+.hero.is-playing .hero__media video { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .hero__poster img { animation: none; } }

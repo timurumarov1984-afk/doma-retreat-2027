@@ -88,20 +88,24 @@
     revealEls.forEach(function (el) { el.classList.add('is-in'); });
   }
 
-  /* ---------- Videos: play only while visible ---------- */
-  document.querySelectorAll('video[data-autoplay]').forEach(function (video) {
-    if (reduceMotion) {
-      video.removeAttribute('autoplay');
-      video.pause();
-      return;
-    }
+  /* ---------- Videos: autoplay while visible ----------
+     In-app browsers (Telegram, WhatsApp, Instagram) and iOS Low Power Mode block autoplay
+     until the first touch. Then the hero shows a moving preview (animated AVIF) instead of a still
+     frame, and every video starts on the first touch while it is on screen. */
+  var autoVideos = Array.prototype.slice.call(document.querySelectorAll('video[data-autoplay]'));
+  var inView = new Map();
+  var started = new Set();
+  var tryPlay = function (v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); return p; };
+  autoVideos.forEach(function (video) {
+    video.addEventListener('playing', function () { started.add(video); });
+    if (reduceMotion) { video.removeAttribute('autoplay'); video.pause(); return; }
     if (!('IntersectionObserver' in window)) return;
     new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
+        inView.set(video, entry.isIntersecting);
         if (entry.isIntersecting) {
           if (video.preload === 'none') video.preload = 'auto';
-          var p = video.play();
-          if (p && p.catch) p.catch(function () { /* autoplay blocked — poster stays */ });
+          tryPlay(video);
         } else {
           video.pause();
         }
@@ -109,20 +113,50 @@
     }, { threshold: 0.05 }).observe(video);
   });
 
+  var unlockEvents = ['touchstart', 'touchend', 'pointerup', 'mousedown', 'keydown', 'click'];
+  var unlock = function () {
+    autoVideos.forEach(function (v) { if (v.paused && inView.get(v)) tryPlay(v); });
+    if (started.size >= autoVideos.length) {
+      unlockEvents.forEach(function (ev) { window.removeEventListener(ev, unlock, true); });
+    }
+  };
+  if (!reduceMotion) {
+    unlockEvents.forEach(function (ev) { window.addEventListener(ev, unlock, { passive: true, capture: true }); });
+  }
+
   /* ---------- Hero: show the video the moment it really plays ---------- */
   var heroSection = document.querySelector('.hero');
   var heroVideo = heroSection && heroSection.querySelector('video');
   if (heroVideo) {
     var heroShown = false;
+    var heroPoster = heroSection.querySelector('.hero__poster');
     var showHeroVideo = function () {
       if (heroShown) return;
       heroShown = true;
       heroSection.classList.add('is-playing');
     };
+    // autoplay blocked → swap the still first frame for a moving preview
+    var useMotionPreview = function () {
+      if (heroShown || !heroPoster || heroPoster.classList.contains('is-motion')) return;
+      heroPoster.classList.add('is-motion');
+      var mob = document.createElement('source');
+      mob.type = 'image/avif';
+      mob.media = '(max-aspect-ratio: 4/5)';
+      mob.srcset = 'assets/video/hero-intro-m.avif';
+      var desk = document.createElement('source');
+      desk.type = 'image/avif';
+      desk.srcset = 'assets/video/hero-intro.avif';
+      heroPoster.insertBefore(desk, heroPoster.firstChild);
+      heroPoster.insertBefore(mob, desk);
+    };
     heroVideo.addEventListener('playing', showHeroVideo);
     heroVideo.addEventListener('timeupdate', function () { if (heroVideo.currentTime > 0.04) showHeroVideo(); });
     if (!heroVideo.paused && heroVideo.readyState >= 3) showHeroVideo();
-    if (!reduceMotion) { var pr = heroVideo.play(); if (pr && pr.catch) pr.catch(function () {}); }
+    if (!reduceMotion) {
+      var pr = heroVideo.play();
+      if (pr && pr.catch) pr.catch(function (e) { if (e && e.name === 'NotAllowedError') useMotionPreview(); });
+      setTimeout(function () { if (!heroShown && heroVideo.paused) useMotionPreview(); }, 2500);
+    }
   }
 
   /* ---------- Gallery arrows ---------- */

@@ -30,11 +30,10 @@
     "startDate": "2027-05-09T14:00+01:00",
     "endDate": "2027-05-17T12:00+01:00",
     "eventStatus": "https://schema.org/EventScheduled",
-    "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
     "inLanguage": ["ru", "en"],
     "image": ["https://timurumarov1984-afk.github.io/doma-retreat-2027/assets/img/og.jpg"],
-    "location": [
-      {
+    "location": {
         "@type": "Place",
         "name": "DOMA Portugal",
         "address": {
@@ -45,12 +44,9 @@
           "addressCountry": "PT"
         },
         "geo": { "@type": "GeoCoordinates", "latitude": 38.987736, "longitude": -9.2760824 }
-      },
-      { "@type": "VirtualLocation", "url": "https://www.retreatmaster.online" }
-    ],
+    },
     "offers": [
-      { "@type": "Offer", "name": "Офлайн-ретрит в DOMA", "price": "1200", "priceCurrency": "EUR", "availability": "https://schema.org/LimitedAvailability", "url": "https://docs.google.com/forms/d/e/1FAIpQLScufP0JZy3R-6JEgpHcbot98bKMqCGhywQrjM5NU0Y8SmFUuQ/viewform" },
-      { "@type": "Offer", "name": "Онлайн-ретрит", "price": "450", "priceCurrency": "EUR", "url": "https://docs.google.com/forms/d/e/1FAIpQLScufP0JZy3R-6JEgpHcbot98bKMqCGhywQrjM5NU0Y8SmFUuQ/viewform" }
+      { "@type": "Offer", "name": "Ретрит в DOMA", "price": "1200", "priceCurrency": "EUR", "availability": "https://schema.org/LimitedAvailability", "url": "https://docs.google.com/forms/d/e/1FAIpQLScufP0JZy3R-6JEgpHcbot98bKMqCGhywQrjM5NU0Y8SmFUuQ/viewform" }
     ],
     "performer": { "@type": "Person", "name": "Мастер Камильпаша" },
     "organizer": { "@type": "Organization", "name": "Master’s Retreat", "email": "noda.connect@gmail.com", "url": "https://www.retreatmaster.online" }
@@ -694,19 +690,19 @@
           <div>
             <p class="kicker reveal"><span lang="ru">Стоимость</span><span lang="en">Pricing</span></p>
             <h2 class="h2 reveal" data-delay="1">
-              <span lang="ru">Два формата <em>участия</em></span>
-              <span lang="en">Two ways <em>to join</em></span>
+              <span lang="ru">Участие <em>в&nbsp;ретрите</em></span>
+              <span lang="en">Joining <em>the retreat</em></span>
             </h2>
           </div>
           <p class="lead reveal" data-delay="2">
-            <span lang="ru">Приезжайте в&nbsp;DOMA или практикуйте вместе с&nbsp;группой онлайн. Реквизиты для оплаты пришлём после подтверждения заявки.</span>
-            <span lang="en">Join us at DOMA or practise with the group online. Payment details are sent once your application is confirmed.</span>
+            <span lang="ru">Девять дней практики с&nbsp;Мастером в&nbsp;DOMA. Реквизиты для оплаты пришлём после подтверждения заявки.</span>
+            <span lang="en">Nine days of practice with the Master at DOMA. Payment details are sent once your application is confirmed.</span>
           </p>
         </div>
 
         <div class="plans">
           <article class="plan plan--main reveal">
-            <span class="plan__tag"><span lang="ru">Офлайн · DOMA · 9–17 мая</span><span lang="en">In person · DOMA · 9–17 May</span></span>
+            <span class="plan__tag"><span lang="ru">DOMA · 9–17 мая 2027</span><span lang="en">DOMA · 9–17 May 2027</span></span>
             <h3><span lang="ru">Ретрит в&nbsp;DOMA</span><span lang="en">Retreat at DOMA</span></h3>
             <p class="plan__price">1&nbsp;200&nbsp;€</p>
             <ul class="plan__rows">
@@ -726,47 +722,30 @@
             </a>
           </article>
 
-          <article class="plan reveal" data-delay="1">
-            <span class="plan__tag"><span lang="ru">Онлайн · Zoom · 9–16 мая</span><span lang="en">Online · Zoom · 9–16 May</span></span>
-            <h3><span lang="ru">Онлайн-ретрит</span><span lang="en">Online retreat</span></h3>
-            <p class="plan__price">450&nbsp;€</p>
-            <ul class="plan__list">
-              <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><span lang="ru">Трансляции медитаций с&nbsp;Мастером в&nbsp;общем поле с&nbsp;офлайн-группой</span><span lang="en">Live streams of the meditations, in the shared field with the in-person group</span></span></li>
-              <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><span lang="ru">Оплата в&nbsp;течение 7 дней после подтверждения заявки</span><span lang="en">Payment within 7 days of your application being confirmed</span></span></li>
-              <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><span lang="ru">Криптовалюта или перевод в&nbsp;рублях</span><span lang="en">Crypto or transfer in roubles</span></span></li>
-              <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><span lang="ru">Состоится при участии от&nbsp;10 человек, иначе — полный возврат</span><span lang="en">Runs with at least 10 participants, otherwise a full refund</span></span></li>
-            </ul>
-            <div class="plan__spacer"></div>
-            <a class="btn" href="apply.html">
-              <span lang="ru">Подать заявку</span><span lang="en">Apply</span>
-              <svg aria-hidden="true"><use href="#i-arrow"/></svg>
-            </a>
-          </article>
-        </div>
-
-        <details class="refund reveal">
-          <summary><span><span lang="ru">Условия отмены и&nbsp;возврата</span><span lang="en">Cancellation and refunds</span></span><span class="plus" aria-hidden="true"></span></summary>
-          <div class="faq__a">
-            <div lang="ru">
-              <p>Если Мастер или кто-то из&nbsp;организаторов не&nbsp;сможет провести ретрит, а&nbsp;также при форс-мажоре стоимость офлайн-ретрита возвращается за&nbsp;вычетом прямых расходов (аренда зала, дорога Мастера и&nbsp;т.&nbsp;д.), онлайн-ретрита — полностью.</p>
-              <p>Если вы оплатили офлайн-участие, но&nbsp;не&nbsp;можете поехать:</p>
+          <article class="plan plan--terms reveal" data-delay="1">
+            <span class="plan__tag"><span lang="ru">Условия</span><span lang="en">Terms</span></span>
+            <h3><span lang="ru">Отмена и&nbsp;возврат</span><span lang="en">Cancellation and refunds</span></h3>
+            <div class="plan__terms" lang="ru">
+              <p>Если Мастер или кто-то из&nbsp;организаторов не&nbsp;сможет провести ретрит, а&nbsp;также при форс-мажоре стоимость возвращается за&nbsp;вычетом прямых расходов (аренда зала, дорога Мастера и&nbsp;т.&nbsp;д.).</p>
+              <p>Если вы оплатили участие, но&nbsp;не&nbsp;можете поехать:</p>
               <ul>
                 <li>более чем за&nbsp;2 месяца до&nbsp;начала — возвращается 100%;</li>
                 <li>за&nbsp;1–2 месяца — 50%;</li>
                 <li>менее чем за&nbsp;месяц — оплата не&nbsp;возвращается.</li>
               </ul>
             </div>
-            <div lang="en">
-              <p>If the Master or one of the organisers is unable to hold the retreat, or in case of force majeure, the in-person retreat fee is refunded minus direct costs (venue rental, the Master’s travel, etc.); the online retreat fee is refunded in full.</p>
-              <p>If you have paid for the in-person retreat but can’t come:</p>
+            <div class="plan__terms" lang="en">
+              <p>If the Master or one of the organisers is unable to hold the retreat, or in case of force majeure, the fee is refunded minus direct costs (venue rental, the Master’s travel, etc.).</p>
+              <p>If you have paid but can’t come:</p>
               <ul>
                 <li>more than 2 months before the start — 100% refund;</li>
                 <li>1–2 months before — 50% refund;</li>
                 <li>less than a month before — no refund.</li>
               </ul>
             </div>
-          </div>
-        </details>
+          </article>
+        </div>
+
       </div>
     </section>
 

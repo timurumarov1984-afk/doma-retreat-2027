@@ -1536,3 +1536,11 @@ details[open] .plus::after { transform: translate(-50%, -50%) rotate(0deg); }
 .hero.is-playing .hero__media video { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .hero__poster img { animation: none; } }
 .hero__poster.is-motion img { animation: none; }
+
+/* pricing: cancellation terms card (next to the price) */
+.plan--terms h3 { margin-bottom: 18px; }
+.plan__terms { color: var(--ink-soft); font-size: 15px; }
+.plan__terms p { margin: 0 0 12px; }
+.plan__terms ul { list-style: none; margin: 4px 0 0; }
+.plan__terms li { position: relative; padding: 7px 0 7px 22px; border-top: 1px solid var(--line); }
+.plan__terms li::before { content: ""; position: absolute; left: 0; top: 17px; width: 8px; height: 8px; border-radius: 50%; background: var(--straw); }

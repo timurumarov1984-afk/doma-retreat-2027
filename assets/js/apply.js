@@ -42,12 +42,10 @@
       title: { ru: 'Опыт практики', en: 'Your practice' },
       intro: { ru: 'Это поможет нам лучше подготовиться к&nbsp;встрече.', en: 'This helps us prepare for meeting you.' },
       fields: [
-        { name: 'format', entry: '1453769740', type: 'cards', required: true,
-          label: { ru: 'В каком формате хочешь участвовать?', en: 'Which format would you like to join?' },
-          options: [{ v: 'Оффлайн', ru: 'Офлайн — приеду в DOMA, 9–17 мая', en: 'In person — at DOMA, 9–17 May' },
-                    { v: 'Онлайн', ru: 'Онлайн — трансляции в Zoom, 9–16 мая', en: 'Online — live on Zoom, 9–16 May' }] },
+        // формат один — ретрит в DOMA; поле обязательно в Google-форме, поэтому отправляем значение автоматически
+        { name: 'format', entry: '1453769740', type: 'fixed', value: 'Оффлайн' },
         { name: 'offline', entry: '561608447', type: 'radio', required: true, options: YES_NO,
-          label: { ru: 'Есть ли у тебя опыт офлайн-ретритов с&nbsp;Мастером?', en: 'Have you been to in-person retreats with the Master?' } },
+          label: { ru: 'Есть ли у тебя опыт очных ретритов с&nbsp;Мастером?', en: 'Have you been to in-person retreats with the Master?' } },
         { name: 'offlineTimes', entry: '1333758775', type: 'radio', required: true, options: TIMES,
           showIf: { name: 'offline', value: 'Да' }, valueIfHidden: 'Не участвовал',
           label: { ru: 'Сколько раз?', en: 'How many times?' } },
@@ -148,6 +146,7 @@
   function fieldHTML(f, stepIndex) {
     if (f.type === 'note') return '<div class="note-box">' + L(f.text) + '</div>';
     allFields.push(f);
+    if (f.type === 'fixed') return '';
     var id = 'f-' + f.name;
     var req = f.required ? '<span class="req" aria-hidden="true">*</span>' : '';
     var hint = f.hint ? '<p class="field__hint">' + L(f.hint) + '</p>' : '';
@@ -221,6 +220,7 @@
       var a = form.elements.arrival.value, d = form.elements.departure.value;
       return a && d ? { a: a, d: d } : null;
     }
+    if (f.type === 'fixed') return f.value;
     if (f.type === 'consent') return form.elements[f.name].checked ? f.value : '';
     return (form.elements[f.name].value || '').trim();
   }
@@ -252,6 +252,7 @@
     box.innerHTML = msg ? L(msg) : '';
   }
   function validateField(f) {
+    if (f.type === 'fixed') return true;
     if (!isVisible(f)) { setError(f, null); return true; }
     var v = getValue(f), err = null;
     if (f.type === 'dates') {
@@ -270,7 +271,7 @@
   function validateStep(i) {
     var ok = true, first = null;
     STEPS[i].fields.forEach(function (f) {
-      if (f.type === 'note') return;
+      if (f.type === 'note' || f.type === 'fixed') return;
       if (!validateField(f)) { ok = false; if (!first) first = f; }
     });
     if (first) {

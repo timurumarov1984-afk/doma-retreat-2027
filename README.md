@@ -6,7 +6,7 @@
 
 ```
 index.html              — главная страница (RU и EN тексты рядом)
-join.html / travel.html / faq.html / activities.html — «Как попасть на ретрит», «Как добраться», «Частые вопросы», «Досуг и активности»
+included.html / stay.html / join.html / travel.html / activities.html / faq.html — «Что включено», «Проживание», «Как попасть на ретрит», «Как добраться», «Досуг и активности», «Частые вопросы» (на главной — 6 карточек-кнопок)
 apply.html              — анкета участника (своя страница, ответы уходят в Google-форму)
 assets/css/styles.css   — оформление сайта (цвета — в начале файла, :root)
 assets/css/apply.css    — оформление анкеты

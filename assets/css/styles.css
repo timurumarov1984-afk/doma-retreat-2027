@@ -1597,3 +1597,37 @@ details[open] .plus::after { transform: translate(-50%, -50%) rotate(0deg); }
   .guide-cards--4 { grid-template-columns: minmax(0, 1fr); }
 }
 .nw { white-space: nowrap; }
+
+/* ==========================================================================
+   2026-11-11 (b): 6-card hub, current page marker, moved sections on sub-pages
+   ========================================================================== */
+.guide-card--current {
+  border-color: rgba(var(--accent-rgb), 0.45);
+  background: var(--cream);
+  box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.25);
+  cursor: default;
+}
+.guide-card--current:hover { transform: none; box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.25); }
+.guide-card--current .guide-card__img img { transform: none !important; }
+.guide-card__here {
+  align-self: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(var(--accent-rgb), 0.1);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.subpage .stay,
+.subpage .included { background: transparent; }
+.place__more { display: flex; flex-wrap: wrap; gap: 14px 28px; }
+.plan__fine a { color: inherit; font-weight: 600; text-underline-offset: 3px; }
+.menu { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.menu nav { padding-block: 12px; }
+@media (max-height: 760px) {
+  .menu nav a { font-size: clamp(20px, 5.6vw, 26px); padding: 4px 0; }
+}
+.guide-card--current .guide-card__text { display: none; }

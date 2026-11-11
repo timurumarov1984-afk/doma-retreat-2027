@@ -10,6 +10,8 @@ join.html / travel.html / faq.html — «Как попасть на ретрит
 apply.html              — анкета участника (своя страница, ответы уходят в Google-форму)
 assets/css/styles.css   — оформление сайта (цвета — в начале файла, :root)
 assets/css/apply.css    — оформление анкеты
+assets/css/theme-portugal.css — португальская тема: цвета (кобальт азулежу, жёлтый трамвай, белые стены) и орнаменты
+assets/img/pt/          — орнаменты темы: плитка, волна калсады, трамвай (свои рисунки, SVG)
 assets/js/main.js       — язык, меню, анимации, видео, фото в лайтбоксе
 assets/js/apply.js      — вопросы анкеты и отправка в Google-форму
 assets/img/             — фото (WebP); retreat/ — фото прошлого ретрита

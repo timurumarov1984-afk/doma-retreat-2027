@@ -1,0 +1,205 @@
+/* ==========================================================================
+   Theme · Portugal (DOMA, Mafra)
+   Azulejo cobalt, Lisbon-tram yellow, lime-washed white walls, night navy.
+   Ornaments (original drawings) live in assets/img/pt/:
+     tile.svg       azulejo band under the hero
+     tile-line.svg  faint tile texture on dark sections
+     wave.svg       calçada / Atlantic wave edge above the footer
+     tram.svg       Lisbon tram on the "Как добраться" page
+   Load after styles.css (and after apply.css on the form page).
+   Without this file the site falls back to the neutral template palette.
+   ========================================================================== */
+
+:root {
+  --cream: #fbf9f4;        /* lime-washed wall: page background, light text on dark */
+  --linen: #edf2f9;        /* pale azulejo blue: alternating sections, cards */
+  --sand: #faf0d6;         /* pale sun: warm section, image placeholders */
+  --straw: #f2be3a;        /* tram yellow: dots and labels on dark */
+  --wood: #c9a04a;
+  --accent: #1f4e96;       /* azulejo cobalt: accents, links, buttons on light */
+  --accent-dark: #173d78;
+  --accent-soft: #7a97c9;
+  --peach: #f6d27a;        /* soft sun: accents on dark */
+  --olive: #1f4e96;
+  --forest: #10284b;       /* night navy: dark sections */
+  --forest-2: #183660;
+  --ink: #152239;
+  --ink-soft: #4b5873;
+
+  --sun: #f2be3a;
+  --sun-hover: #f7cd5e;
+  --tile-band: 44px;
+
+  --ink-rgb: 21, 34, 57;
+  --ink-soft-rgb: 75, 88, 115;
+  --cream-rgb: 251, 249, 244;
+  --linen-rgb: 237, 242, 249;
+  --peach-rgb: 246, 210, 122;
+  --accent-rgb: 31, 78, 150;
+  --forest-rgb: 16, 40, 75;
+  --shade-rgb: 8, 19, 38;
+  --hero-bg: #0e2240;
+  --hero-panel: #0e2240;
+  --btn-hover: #173d78;
+}
+
+/* clean glazed look: no paper grain */
+body::after { display: none; }
+
+/* ---------- Buttons: cobalt on light, tram yellow on dark ---------- */
+.btn { --bg: var(--accent); --fg: #fff; }
+.btn:hover { background: var(--accent-dark); }
+.btn--light { --bg: var(--sun); --fg: var(--forest); }
+.btn--light:hover { background: var(--sun-hover); }
+.btn--ghost { --bg: transparent; --fg: var(--cream); }
+.btn--outline { --bg: transparent; --fg: var(--accent); --bd: rgba(var(--accent-rgb), 0.35); }
+.btn--outline:hover { background: var(--accent); color: #fff; }
+
+.header .btn { --bg: var(--sun); --fg: var(--forest); }
+.header .btn:hover { background: var(--sun-hover); opacity: 1; }
+.header.is-scrolled .btn,
+.header--solid .btn { --bg: var(--accent); --fg: #fff; }
+.header.is-scrolled .btn:hover,
+.header--solid .btn:hover { background: var(--accent-dark); }
+
+/* brand mark as a small blue tile */
+.brand svg {
+  width: 34px;
+  height: 34px;
+  padding: 4px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ---------- Kicker: a little tile instead of a line ---------- */
+.kicker::before,
+.final .kicker::after {
+  width: 8px;
+  height: 8px;
+  margin: 0 4px;
+  background: var(--sun);
+  transform: rotate(45deg);
+}
+
+/* ---------- Hero: azulejo band at the foot of the "wall" ---------- */
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  height: var(--tile-band);
+  background: url("../img/pt/tile.svg") left top / var(--tile-band) var(--tile-band) repeat-x;
+  box-shadow: 0 -3px 0 var(--accent);
+  pointer-events: none;
+}
+.hero__content { padding-bottom: calc(clamp(24px, 3.5vw, 40px) + var(--tile-band)); }
+
+/* ---------- Doorways: arches with a sun-yellow surround, like DOMA's manor ---------- */
+.about__main.arch,
+.arch-frame,
+.cocreate__img.arch,
+.apply__photo.arch {
+  box-shadow: 0 0 0 7px var(--sun);
+}
+
+/* rotating badge becomes a blue postmark */
+.badge { background: var(--accent); box-shadow: 0 0 0 5px var(--cream), 0 0 0 7px rgba(var(--accent-rgb), 0.35); }
+
+/* ---------- Dark sections with a faint tile texture ---------- */
+.schedule,
+.menu {
+  background-image: url("../img/pt/tile-line.svg");
+  background-size: 132px 132px;
+}
+
+/* ---------- Small accents ---------- */
+details[open] .plus { background: var(--accent); border-color: var(--accent); }
+.guide-card__arrow { background: var(--accent); }
+.map iframe { filter: grayscale(0.2) contrast(0.98); }
+.map { background: var(--linen); }
+
+/* ---------- Calçada wave above the footer ---------- */
+.footer { position: relative; z-index: 1; }
+.footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% - 1px);
+  height: 30px;
+  background: url("../img/pt/wave.svg") left bottom / 120px 30px repeat-x;
+  pointer-events: none;
+}
+
+/* ---------- "Как добраться": a Lisbon tram arrives ---------- */
+.subpage .travel { position: relative; padding-top: calc(clamp(28px, 4vw, 56px) + 140px); }
+.subpage .travel::before,
+.subpage .travel::after {
+  content: "";
+  position: absolute;
+  top: clamp(20px, 3vw, 40px);
+  left: 0;
+  right: 0;
+  height: 120px;
+  pointer-events: none;
+}
+/* overhead wire + rail across the page */
+.subpage .travel::after {
+  background:
+    linear-gradient(#7d89a1 0 0) left 7px / 100% 1.4px no-repeat,
+    linear-gradient(#8a96ad 0 0) left 113px / 100% 2.4px no-repeat;
+}
+.subpage .travel::before {
+  z-index: 1;
+  background: url("../img/pt/tram.svg") right max(var(--gutter), calc((100vw - var(--container)) / 2)) top 0 / auto 120px no-repeat;
+  animation: tram-arrive 3.2s cubic-bezier(0.16, 0.8, 0.3, 1) 0.2s both;
+}
+@keyframes tram-arrive { from { transform: translateX(110%); } to { transform: none; } }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 760px) {
+  :root { --tile-band: 34px; }
+  /* the band sits between the video and the buttons, so the video stays fully visible */
+  .hero::after { top: min(80svh, 720px); bottom: auto; box-shadow: none; }
+  .hero__bottom { padding-top: calc(26px + var(--tile-band)); }
+  .hero__content { padding-bottom: 0; }
+  .subpage .travel { padding-top: calc(28px + 104px); }
+  .subpage .travel::before,
+  .subpage .travel::after { height: 84px; top: 16px; }
+  .subpage .travel::before { background-size: auto 84px; }
+  .subpage .travel::after {
+    background:
+      linear-gradient(#7d89a1 0 0) left 5px / 100% 1.2px no-repeat,
+      linear-gradient(#8a96ad 0 0) left 79px / 100% 2px no-repeat;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .subpage .travel::before { animation: none; }
+}
+
+/* ==========================================================================
+   Application page
+   ========================================================================== */
+.progress span { background: var(--accent); }
+.choice input:checked + span { background: var(--accent); border-color: var(--accent); color: #fff; }
+.choice--box input:checked + span::before {
+  background: var(--sun) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310284B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 12px no-repeat;
+  border-color: var(--sun);
+}
+.steps-nav li::after { color: var(--accent-soft); }
+.steps-nav li.is-current::after { color: var(--accent); }
+
+/* accents inside dark sections must stay light */
+.schedule .h2 em,
+.plan--main em { color: var(--peach); }
+
+@media (max-width: 600px) {
+  .brand { gap: 10px; }
+  .brand svg { width: 30px; height: 30px; padding: 3px; border-radius: 7px; }
+  .brand__name { white-space: nowrap; letter-spacing: 0.12em; }
+  .apply-header__actions { gap: 10px; }
+}

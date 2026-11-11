@@ -1557,3 +1557,43 @@ details[open] .plus::after { transform: translate(-50%, -50%) rotate(0deg); }
 .plan__terms ul { list-style: none; margin: 4px 0 0; }
 .plan__terms li { position: relative; padding: 7px 0 7px 22px; border-top: 1px solid var(--line); }
 .plan__terms li::before { content: ""; position: absolute; left: 0; top: 17px; width: 8px; height: 8px; border-radius: 50%; background: var(--straw); }
+
+/* ==========================================================================
+   2026-11-11: in-person note, 4 "included" cards in one row, 4 guide cards,
+   text-only co-creation block on activities.html
+   ========================================================================== */
+.live-note {
+  margin: 26px 0 0;
+  padding: 12px 0 12px 18px;
+  border-left: 2px solid var(--accent-soft);
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.apply__aside .live-note { margin-top: 18px; max-width: 420px; }
+
+.cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cards .card,
+.cards .card:nth-child(n + 4) { grid-column: auto; }
+.cards .card:nth-child(n + 4) .card__img { aspect-ratio: 5 / 4; }
+
+.guide-cards--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.cocreate--text { background: var(--sand); }
+.cocreate--text .chips { margin-top: 0; }
+
+@media (max-width: 1100px) {
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 960px) {
+  .cards .card:last-child { grid-column: auto; }
+  .cards .card:last-child .card__img { aspect-ratio: 5 / 4; }
+}
+@media (max-width: 600px) {
+  .cards { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 960px) {
+  .guide-cards--4 { grid-template-columns: minmax(0, 1fr); }
+}
+.nw { white-space: nowrap; }

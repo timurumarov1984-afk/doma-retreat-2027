@@ -1,40 +1,37 @@
 /* ==========================================================================
    Theme · Portugal (DOMA, Mafra)
-   Azulejo cobalt, Lisbon-tram yellow, lime-washed white walls, night navy.
-   Ornaments (original drawings) live in assets/img/pt/:
-     tile.svg       azulejo band under the hero
-     tile-line.svg  faint tile texture on dark sections
-     wave.svg       calçada / Atlantic wave edge above the footer
-     tram.svg       Lisbon tram on the "Как добраться" page
+   Quiet hints, no postcards: azulejo cobalt, lime-washed white, warm ochre
+   (the colour of DOMA's door and window surrounds), night navy.
+   One ornament only — a thin tile border (assets/img/pt/band.svg) under the
+   hero and above the footer.
    Load after styles.css (and after apply.css on the form page).
-   Without this file the site falls back to the neutral template palette.
    ========================================================================== */
 
 :root {
   --cream: #fbf9f4;        /* lime-washed wall: page background, light text on dark */
   --linen: #edf2f9;        /* pale azulejo blue: alternating sections, cards */
-  --sand: #faf0d6;         /* pale sun: warm section, image placeholders */
-  --straw: #f2be3a;        /* tram yellow: dots and labels on dark */
-  --wood: #c9a04a;
+  --sand: #f6eedc;         /* warm sand */
+  --straw: #dcae5a;        /* ochre: small dots and labels on dark */
+  --wood: #c49a52;
   --accent: #1f4e96;       /* azulejo cobalt: accents, links, buttons on light */
   --accent-dark: #173d78;
   --accent-soft: #7a97c9;
-  --peach: #f6d27a;        /* soft sun: accents on dark */
+  --peach: #e8d3a0;        /* soft ochre: accents on dark */
   --olive: #1f4e96;
   --forest: #10284b;       /* night navy: dark sections */
   --forest-2: #183660;
   --ink: #152239;
   --ink-soft: #4b5873;
 
-  --sun: #f2be3a;
-  --sun-hover: #f7cd5e;
-  --tile-band: 44px;
+  --sun: #dcae5a;          /* ochre buttons on dark */
+  --sun-hover: #e6bf73;
+  --band-h: 16px;
 
   --ink-rgb: 21, 34, 57;
   --ink-soft-rgb: 75, 88, 115;
   --cream-rgb: 251, 249, 244;
   --linen-rgb: 237, 242, 249;
-  --peach-rgb: 246, 210, 122;
+  --peach-rgb: 232, 211, 160;
   --accent-rgb: 31, 78, 150;
   --forest-rgb: 16, 40, 75;
   --shade-rgb: 8, 19, 38;
@@ -43,10 +40,10 @@
   --btn-hover: #173d78;
 }
 
-/* clean glazed look: no paper grain */
+/* clean surfaces: no paper grain */
 body::after { display: none; }
 
-/* ---------- Buttons: cobalt on light, tram yellow on dark ---------- */
+/* ---------- Buttons: cobalt on light, ochre on dark ---------- */
 .btn { --bg: var(--accent); --fg: #fff; }
 .btn:hover { background: var(--accent-dark); }
 .btn--light { --bg: var(--sun); --fg: var(--forest); }
@@ -62,7 +59,7 @@ body::after { display: none; }
 .header.is-scrolled .btn:hover,
 .header--solid .btn:hover { background: var(--accent-dark); }
 
-/* brand mark as a small blue tile */
+/* brand mark on a small blue square */
 .brand svg {
   width: 34px;
   height: 34px;
@@ -72,114 +69,68 @@ body::after { display: none; }
   color: #fff;
 }
 
-/* ---------- Kicker: a little tile instead of a line ---------- */
+/* kicker: a small diamond instead of a line */
 .kicker::before,
 .final .kicker::after {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   margin: 0 4px;
-  background: var(--sun);
+  background: currentColor;
   transform: rotate(45deg);
 }
 
-/* ---------- Hero: azulejo band at the foot of the "wall" ---------- */
-.hero::after {
+/* ---------- Tile border: under the hero, above the footer ---------- */
+.hero::after,
+.footer::before {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
-  z-index: 1;
-  height: var(--tile-band);
-  background: url("../img/pt/tile.svg") left top / var(--tile-band) var(--tile-band) repeat-x;
-  box-shadow: 0 -3px 0 var(--accent);
+  height: var(--band-h);
+  background: url("../img/pt/band.svg") left center / 32px var(--band-h) repeat-x;
   pointer-events: none;
 }
-.hero__content { padding-bottom: calc(clamp(24px, 3.5vw, 40px) + var(--tile-band)); }
+.hero::after { bottom: 0; z-index: 1; }
+.hero__content { padding-bottom: calc(clamp(24px, 3.5vw, 40px) + var(--band-h)); }
+.footer { position: relative; }
+.footer::before { top: 0; }
+.footer { padding-top: calc(72px + var(--band-h)); }
 
-/* ---------- Doorways: arches with a sun-yellow surround, like DOMA's manor ---------- */
+/* ---------- Arches: a thin line around, like a carved doorway ---------- */
 .about__main.arch,
 .arch-frame,
-.cocreate__img.arch,
 .apply__photo.arch {
-  box-shadow: 0 0 0 7px var(--sun);
+  box-shadow: 0 0 0 7px var(--ring-bg, var(--cream)), 0 0 0 8.5px rgba(var(--accent-rgb), 0.45);
 }
+.apply-page { --ring-bg: var(--linen); }
 
-/* rotating badge becomes a blue postmark */
-.badge { background: var(--accent); box-shadow: 0 0 0 5px var(--cream), 0 0 0 7px rgba(var(--accent-rgb), 0.35); }
-
-/* ---------- Dark sections with a faint tile texture ---------- */
-.schedule,
-.menu {
-  background-image: url("../img/pt/tile-line.svg");
-  background-size: 132px 132px;
-}
+.badge { background: var(--accent); }
 
 /* ---------- Small accents ---------- */
 details[open] .plus { background: var(--accent); border-color: var(--accent); }
 .guide-card__arrow { background: var(--accent); }
 .map iframe { filter: grayscale(0.2) contrast(0.98); }
 .map { background: var(--linen); }
-
-/* ---------- Calçada wave above the footer ---------- */
-.footer { position: relative; z-index: 1; }
-.footer::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: calc(100% - 1px);
-  height: 30px;
-  background: url("../img/pt/wave.svg") left bottom / 120px 30px repeat-x;
-  pointer-events: none;
-}
-
-/* ---------- "Как добраться": a Lisbon tram arrives ---------- */
-.subpage .travel { position: relative; padding-top: calc(clamp(28px, 4vw, 56px) + 140px); }
-.subpage .travel::before,
-.subpage .travel::after {
-  content: "";
-  position: absolute;
-  top: clamp(20px, 3vw, 40px);
-  left: 0;
-  right: 0;
-  height: 120px;
-  pointer-events: none;
-}
-/* overhead wire + rail across the page */
-.subpage .travel::after {
-  background:
-    linear-gradient(#7d89a1 0 0) left 7px / 100% 1.4px no-repeat,
-    linear-gradient(#8a96ad 0 0) left 113px / 100% 2.4px no-repeat;
-}
-.subpage .travel::before {
-  z-index: 1;
-  background: url("../img/pt/tram.svg") right max(var(--gutter), calc((100vw - var(--container)) / 2)) top 0 / auto 120px no-repeat;
-  animation: tram-arrive 3.2s cubic-bezier(0.16, 0.8, 0.3, 1) 0.2s both;
-}
-@keyframes tram-arrive { from { transform: translateX(110%); } to { transform: none; } }
+.live-note { border-color: rgba(var(--accent-rgb), 0.5); }
 
 /* ---------- Mobile ---------- */
 @media (max-width: 760px) {
-  :root { --tile-band: 34px; }
-  /* the band sits between the video and the buttons, so the video stays fully visible */
-  .hero::after { top: min(80svh, 720px); bottom: auto; box-shadow: none; }
-  .hero__bottom { padding-top: calc(26px + var(--tile-band)); }
+  /* the border sits between the video and the buttons; the video stays fully visible */
+  .hero::after { top: min(80svh, 720px); bottom: auto; }
+  .hero__bottom { padding-top: calc(26px + var(--band-h)); }
   .hero__content { padding-bottom: 0; }
-  .subpage .travel { padding-top: calc(28px + 104px); }
-  .subpage .travel::before,
-  .subpage .travel::after { height: 84px; top: 16px; }
-  .subpage .travel::before { background-size: auto 84px; }
-  .subpage .travel::after {
-    background:
-      linear-gradient(#7d89a1 0 0) left 5px / 100% 1.2px no-repeat,
-      linear-gradient(#8a96ad 0 0) left 79px / 100% 2px no-repeat;
-  }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .subpage .travel::before { animation: none; }
+@media (max-width: 600px) {
+  .brand { gap: 10px; }
+  .brand svg { width: 30px; height: 30px; padding: 3px; border-radius: 7px; }
+  .brand__name { white-space: nowrap; letter-spacing: 0.12em; }
+  .apply-header__actions { gap: 10px; }
 }
+
+/* accents inside dark sections stay light */
+.schedule .h2 em,
+.plan--main em { color: var(--peach); }
 
 /* ==========================================================================
    Application page
@@ -192,14 +143,3 @@ details[open] .plus { background: var(--accent); border-color: var(--accent); }
 }
 .steps-nav li::after { color: var(--accent-soft); }
 .steps-nav li.is-current::after { color: var(--accent); }
-
-/* accents inside dark sections must stay light */
-.schedule .h2 em,
-.plan--main em { color: var(--peach); }
-
-@media (max-width: 600px) {
-  .brand { gap: 10px; }
-  .brand svg { width: 30px; height: 30px; padding: 3px; border-radius: 7px; }
-  .brand__name { white-space: nowrap; letter-spacing: 0.12em; }
-  .apply-header__actions { gap: 10px; }
-}

@@ -201,7 +201,7 @@
 
   /* ---------- Lightbox for the retreat photos ---------- */
   var lb = document.querySelector('.lightbox');
-  var mosaicItems = Array.prototype.slice.call(document.querySelectorAll('.mosaic__item'));
+  var mosaicItems = Array.prototype.slice.call(document.querySelectorAll('.mosaic__item, [data-lightbox]'));
   if (lb && mosaicItems.length) {
     var lbImg = lb.querySelector('img');
     var lbCount = lb.querySelector('.lightbox__count');

@@ -1,145 +1,165 @@
 /* ==========================================================================
-   Theme · Portugal (DOMA, Mafra)
-   Quiet hints, no postcards: azulejo cobalt, lime-washed white, warm ochre
-   (the colour of DOMA's door and window surrounds), night navy.
-   One ornament only — a thin tile border (assets/img/pt/band.svg) under the
-   hero and above the footer.
+   DOMA theme — clean and calm (2026-11-12)
+   After the review: simpler, no yellow-blue, no arches or frames, one text
+   colour, more structure. Warm whites, near-black ink and one quiet
+   "Atlantic slate" accent; the photos and videos carry the colour.
    Load after styles.css (and after apply.css on the form page).
    ========================================================================== */
 
 :root {
-  --cream: #fbf9f4;        /* lime-washed wall: page background, light text on dark */
-  --linen: #edf2f9;        /* pale azulejo blue: alternating sections, cards */
-  --sand: #f6eedc;         /* warm sand */
-  --straw: #dcae5a;        /* ochre: small dots and labels on dark */
-  --wood: #c49a52;
-  --accent: #1f4e96;       /* azulejo cobalt: accents, links, buttons on light */
-  --accent-dark: #173d78;
-  --accent-soft: #7a97c9;
-  --peach: #e8d3a0;        /* soft ochre: accents on dark */
-  --olive: #1f4e96;
-  --forest: #10284b;       /* night navy: dark sections */
-  --forest-2: #183660;
-  --ink: #152239;
-  --ink-soft: #4b5873;
+  --cream: #faf9f7;        /* page */
+  --linen: #f1efeb;        /* alternate sections */
+  --sand: #e9e5de;
+  --straw: #9aa5ad;        /* small labels on dark */
+  --wood: #8c9196;
+  --accent: #3e5867;       /* Atlantic slate: kickers, links, small details */
+  --accent-dark: #2f4552;
+  --accent-soft: #a3b1ba;
+  --peach: #d5dbdf;        /* light details on dark */
+  --olive: #3e5867;
+  --forest: #1d2226;       /* dark blocks and main buttons */
+  --forest-2: #262c31;
+  --ink: #1d2226;
+  --ink-soft: #5b6268;
 
-  --sun: #dcae5a;          /* ochre buttons on dark */
-  --sun-hover: #e6bf73;
-  --band-h: 16px;
+  --ink-rgb: 29, 34, 38;
+  --ink-soft-rgb: 91, 98, 104;
+  --cream-rgb: 250, 249, 247;
+  --linen-rgb: 241, 239, 235;
+  --peach-rgb: 213, 219, 223;
+  --accent-rgb: 62, 88, 103;
+  --forest-rgb: 29, 34, 38;
+  --shade-rgb: 12, 14, 16;
+  --hero-bg: #15191c;
+  --hero-panel: #15191c;
+  --btn-hover: #000;
 
-  --ink-rgb: 21, 34, 57;
-  --ink-soft-rgb: 75, 88, 115;
-  --cream-rgb: 251, 249, 244;
-  --linen-rgb: 237, 242, 249;
-  --peach-rgb: 232, 211, 160;
-  --accent-rgb: 31, 78, 150;
-  --forest-rgb: 16, 40, 75;
-  --shade-rgb: 8, 19, 38;
-  --hero-bg: #0e2240;
-  --hero-panel: #0e2240;
-  --btn-hover: #173d78;
+  --section-y: clamp(72px, 9vw, 136px);
 }
 
 /* clean surfaces: no paper grain */
 body::after { display: none; }
 
-/* ---------- Buttons: cobalt on light, ochre on dark ---------- */
-.btn { --bg: var(--accent); --fg: #fff; }
-.btn:hover { background: var(--accent-dark); }
-.btn--light { --bg: var(--sun); --fg: var(--forest); }
-.btn--light:hover { background: var(--sun-hover); }
-.btn--ghost { --bg: transparent; --fg: var(--cream); }
-.btn--outline { --bg: transparent; --fg: var(--accent); --bd: rgba(var(--accent-rgb), 0.35); }
-.btn--outline:hover { background: var(--accent); color: #fff; }
-
-.header .btn { --bg: var(--sun); --fg: var(--forest); }
-.header .btn:hover { background: var(--sun-hover); opacity: 1; }
-.header.is-scrolled .btn,
-.header--solid .btn { --bg: var(--accent); --fg: #fff; }
-.header.is-scrolled .btn:hover,
-.header--solid .btn:hover { background: var(--accent-dark); }
-
-/* brand mark on a small blue square */
-.brand svg {
-  width: 34px;
-  height: 34px;
-  padding: 4px;
-  border-radius: 8px;
-  background: var(--accent);
-  color: #fff;
+/* ---------- One text style: headings in one colour and weight ---------- */
+h1, h2 { font-weight: 500; letter-spacing: -0.025em; }
+h1 em, h2 em, h3 em,
+.hero h1 em, .h2 em, .final h2 em,
+.schedule .h2 em, .plan--main em {
+  color: inherit;
+  font-weight: inherit;
+  font-style: normal;
 }
+.hero h1 { font-weight: 500; }
 
-/* kicker: a small diamond instead of a line */
+/* kicker: a quiet label, no lines or diamonds */
+.kicker { gap: 0; color: var(--accent); letter-spacing: 0.18em; }
 .kicker::before,
-.final .kicker::after {
-  width: 7px;
-  height: 7px;
-  margin: 0 4px;
-  background: currentColor;
-  transform: rotate(45deg);
-}
+.final .kicker::after { display: none; }
+.final .kicker,
+.schedule .kicker { color: inherit; opacity: 0.75; }
 
-/* ---------- Tile border: under the hero, above the footer ---------- */
-.hero::after,
-.footer::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: var(--band-h);
-  background: url("../img/pt/band.svg") left center / 32px var(--band-h) repeat-x;
-  pointer-events: none;
-}
-.hero::after { bottom: 0; z-index: 1; }
-.hero__content { padding-bottom: calc(clamp(24px, 3.5vw, 40px) + var(--band-h)); }
-.footer { position: relative; }
-.footer::before { top: 0; }
-.footer { padding-top: calc(72px + var(--band-h)); }
+/* ---------- Buttons: ink on light, white on dark ---------- */
+.btn { --bg: var(--ink); --fg: #fff; }
+.btn:hover { background: #000; }
+.btn--light { --bg: #fff; --fg: var(--ink); }
+.btn--light:hover { background: #ecebe8; }
+.btn--ghost { --bg: transparent; --fg: #fff; --bd: rgba(255, 255, 255, 0.55); }
+.btn--ghost:hover { background: rgba(255, 255, 255, 0.12); }
+.btn--outline { --bg: transparent; --fg: var(--ink); --bd: rgba(var(--ink-rgb), 0.28); }
+.btn--outline:hover { background: var(--ink); color: #fff; }
 
-/* ---------- Arches: a thin line around, like a carved doorway ---------- */
-.about__main.arch,
+.header .btn { --bg: #fff; --fg: var(--ink); }
+.header .btn:hover { background: #ecebe8; opacity: 1; }
+.header.is-scrolled .btn,
+.header--solid .btn { --bg: var(--ink); --fg: #fff; }
+.header.is-scrolled .btn:hover,
+.header--solid .btn:hover { background: #000; }
+
+/* brand: just the line mark and the wordmark */
+.brand svg { width: 28px; height: 28px; padding: 0; border-radius: 0; background: none; color: currentColor; }
+
+/* ---------- No arches, no frames: simple rounded rectangles ---------- */
+.arch,
 .arch-frame,
+.about__main.arch,
 .apply__photo.arch {
-  box-shadow: 0 0 0 7px var(--ring-bg, var(--cream)), 0 0 0 8.5px rgba(var(--accent-rgb), 0.45);
+  border-radius: var(--radius) !important;
+  box-shadow: none !important;
 }
-.apply-page { --ring-bg: var(--linen); }
 
-.badge { background: var(--accent); }
+/* ---------- Calm rhythm: white / light grey sections ---------- */
+.schedule { background: var(--linen); color: var(--ink); }
+.schedule .lead,
+.schedule .note,
+.day__note { color: var(--ink-soft); }
+.day { background: #fff; border-color: var(--line); }
+.day--main { background: #fff; }
+.day__label { color: var(--accent); }
+.timeline li { border-color: var(--line); }
+.timeline time { color: var(--ink); }
+.timeline .hl svg { color: var(--accent); }
 
-/* ---------- Small accents ---------- */
-details[open] .plus { background: var(--accent); border-color: var(--accent); }
-.guide-card__arrow { background: var(--accent); }
-.map iframe { filter: grayscale(0.2) contrast(0.98); }
+.memories { background: var(--cream); }
+.place { background: var(--linen); }
+.place .round-btn,
+.memories .round-btn { background: #fff; border-color: var(--line); }
+.place .round-btn:hover,
+.memories .round-btn:hover { background: var(--ink); color: #fff; }
+.guide { background: var(--cream); }
+.guide-card { background: var(--linen); border-color: transparent; }
+.guide-card:hover { background: #fff; border-color: var(--line); }
+.guide-card__arrow { background: var(--ink); }
+.guide-card--current { background: #fff; border-color: var(--line); box-shadow: none; }
+.guide-card--current:hover { box-shadow: none; }
+.guide-card__here { background: var(--linen); color: var(--ink); }
+.pricing { background: var(--linen); }
+.plan--terms { background: #fff; border-color: transparent; }
+.plan__tag { background: var(--linen); color: var(--ink-soft); }
+.plan--main .plan__tag { background: rgba(255, 255, 255, 0.1); color: var(--peach); }
+.more { background: var(--linen); }
+
+/* about: plain text, no quote bar */
+.about__quote {
+  margin: 26px 0 22px;
+  padding-left: 0;
+  border-left: 0;
+  font-style: normal;
+  font-weight: 400;
+  color: var(--ink);
+}
+.live-note { padding: 0; border-left: 0; }
+
+/* small details */
+.features svg { color: var(--accent); }
+details[open] .plus { background: var(--ink); border-color: var(--ink); color: #fff; }
+.map iframe { filter: grayscale(0.35) contrast(0.98); }
 .map { background: var(--linen); }
-.live-note { border-color: rgba(var(--accent-rgb), 0.5); }
+.gallery__item figcaption { background: rgba(255, 255, 255, 0.92); font-weight: 500; }
 
 /* ---------- Mobile ---------- */
-@media (max-width: 760px) {
-  /* the border sits between the video and the buttons; the video stays fully visible */
-  .hero::after { top: min(80svh, 720px); bottom: auto; }
-  .hero__bottom { padding-top: calc(26px + var(--band-h)); }
-  .hero__content { padding-bottom: 0; }
-}
-
 @media (max-width: 600px) {
   .brand { gap: 10px; }
-  .brand svg { width: 30px; height: 30px; padding: 3px; border-radius: 7px; }
   .brand__name { white-space: nowrap; letter-spacing: 0.12em; }
   .apply-header__actions { gap: 10px; }
 }
 
-/* accents inside dark sections stay light */
-.schedule .h2 em,
-.plan--main em { color: var(--peach); }
-
 /* ==========================================================================
    Application page
    ========================================================================== */
-.progress span { background: var(--accent); }
-.choice input:checked + span { background: var(--accent); border-color: var(--accent); color: #fff; }
+.apply-page { background: var(--linen); }
+.apply-header { background: rgba(var(--linen-rgb), 0.92); }
+.progress span { background: var(--ink); }
+.choice input:checked + span { background: var(--ink); border-color: var(--ink); color: #fff; }
 .choice--box input:checked + span::before {
-  background: var(--sun) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310284B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 12px no-repeat;
-  border-color: var(--sun);
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231d2226' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 12px no-repeat;
+  border-color: #fff;
 }
+.consent input { accent-color: var(--ink); }
 .steps-nav li::after { color: var(--accent-soft); }
-.steps-nav li.is-current::after { color: var(--accent); }
+.steps-nav li.is-current::after { color: var(--ink); }
+.steps-nav li.is-current::before { background: var(--ink); }
+.steps-nav li.is-done,
+.steps-nav li.is-done::after { color: var(--accent); }
+.form-state__icon { background: var(--ink); }
+.apply__aside h1 em,
+.step-head h2 em { color: inherit; font-weight: inherit; font-style: normal; }

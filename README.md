@@ -10,11 +10,10 @@ included.html / stay.html / join.html / travel.html / activities.html / faq.html
 apply.html              — анкета участника (своя страница, ответы уходят в Google-форму)
 assets/css/styles.css   — оформление сайта (цвета — в начале файла, :root)
 assets/css/apply.css    — оформление анкеты
-assets/css/theme-portugal.css — португальская тема: кобальт азулежу, белые стены, охра, ночной синий
-assets/img/pt/band.svg  — единственный орнамент темы: тонкий бордюр из плитки (под видео и над подвалом)
+assets/css/theme-portugal.css — тема DOMA: чистая и спокойная (тёплый белый, почти чёрный текст, один приглушённый акцент «атлантический сланец»)
 assets/js/main.js       — язык, меню, анимации, видео, фото в лайтбоксе
 assets/js/apply.js      — вопросы анкеты и отправка в Google-форму
-assets/img/             — фото (WebP); retreat/ — фото прошлого ретрита
+assets/img/             — фото (WebP); retreat/mNN — 15 фото прошлого ретрита для ленты «Как это было» (NN-full — крупно)
 assets/video/           — видео:
     hero.mp4 / hero-mobile.mp4    первый экран, ~26 с по кругу — «состояние ретрита»: дрон → люди в зале → Мастер → лаунж → вывеска DOMA → сад → терраса → Мастер
     arch.mp4                      арка в блоке «Место» (Glamps — лес и шатры)

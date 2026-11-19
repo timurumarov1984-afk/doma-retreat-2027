@@ -1,0 +1,286 @@
+<title>Заявки DOMA в Telegram</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Layout: one calm reading column, numbered steps (a real sequence), code block with copy */
+:root {
+  --bg: #f6f5f2; --surface: #ffffff; --ink: #1d2226; --ink-soft: #5b6268;
+  --line: #e2e0db; --accent: #3e5a6b; --accent-soft: #e6ecef; --ok: #2f6b4a; --code-bg: #f0efeb;
+  --display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --body: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #15191c; --surface: #1d2226; --ink: #eceae6; --ink-soft: #a6adb3;
+  --line: #2e353a; --accent: #9fbccc; --accent-soft: #24313a; --ok: #7cc39b; --code-bg: #12161a; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #15191c; --surface: #1d2226; --ink: #eceae6; --ink-soft: #a6adb3;
+  --line: #2e353a; --accent: #9fbccc; --accent-soft: #24313a; --ok: #7cc39b; --code-bg: #12161a; color-scheme: dark }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 720px; margin: 0 auto; padding-block: 48px 72px; display: flex; flex-direction: column; gap: 40px; }
+.kicker { font: 600 12px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
+h1 { font: 700 clamp(28px, 5vw, 40px)/1.15 var(--display); margin: 0 0 14px; text-wrap: balance; }
+h2 { font: 600 20px/1.3 var(--display); margin: 0 0 12px; text-wrap: balance; }
+p { margin: 0 0 10px; } p:last-child { margin-bottom: 0; }
+.lead { color: var(--ink-soft); font-size: 17px; max-width: 62ch; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 18px; font-size: 14px; color: var(--ink-soft); }
+.meta b { color: var(--ink); font-weight: 600; }
+.steps { list-style: none; margin: 0; padding: 0; counter-reset: s; display: flex; flex-direction: column; gap: 14px; }
+.step { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px 20px 64px; position: relative; min-width: 0; }
+.step::before { content: counter(s); position: absolute; left: 20px; top: 19px; width: 30px; height: 30px; border-radius: 50%;
+  background: var(--accent-soft); color: var(--accent); font: 700 14px/30px var(--display); text-align: center; }
+.step h3 { font: 600 17px/1.35 var(--display); margin: 3px 0 8px; }
+.step p, .step li { color: var(--ink-soft); }
+.step ul { margin: 6px 0 0; padding-left: 18px; }
+.path { color: var(--ink); font-weight: 500; }
+code, .kbd { font: 14px/1.4 var(--mono); background: var(--code-bg); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; color: var(--ink); white-space: nowrap; }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 12px; }
+button { font: 600 14px/1 var(--body); border: 1px solid var(--accent); background: var(--accent); color: var(--bg); padding: 10px 16px; border-radius: 999px; cursor: pointer; }
+button.ghost { background: transparent; color: var(--accent); }
+button:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 2px; }
+.done { font-size: 14px; color: var(--ok); font-weight: 600; }
+details { margin-top: 12px; }
+summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: 14px; }
+pre { margin: 12px 0 0; max-height: 360px; overflow: auto; background: var(--code-bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px; font: 12.5px/1.5 var(--mono); color: var(--ink); }
+.note { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; color: var(--ink-soft); }
+.msg { background: var(--surface); border: 1px solid var(--line); border-radius: 14px 14px 14px 4px; padding: 16px 18px; font-size: 14.5px; max-width: 440px; }
+.msg b { color: var(--ink); } .msg p { color: var(--ink-soft); margin-bottom: 8px; }
+.msg a { color: var(--accent); }
+.faq { display: flex; flex-direction: column; gap: 14px; }
+.faq div { border-top: 1px solid var(--line); padding-top: 14px; }
+.faq b { display: block; margin-bottom: 4px; }
+.faq span { color: var(--ink-soft); }
+@media (max-width: 480px) { .step { padding: 18px 16px 18px 56px; } .step::before { left: 14px; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="kicker">Ретрит в DOMA · 9–18 мая 2027</p>
+    <h1>Заявки с сайта — сразу в Telegram</h1>
+    <p class="lead">Вера, это инструкция для тебя. После настройки на каждую новую заявку с сайта ретрита тебе в Telegram будет приходить сообщение со всеми ответами анкеты и ссылкой на таблицу. Делается один раз, минут 10–15, с компьютера.</p>
+    <div class="meta"><span>Получатель: <b>@verak_</b></span><span>Источник: <b>Google-форма анкеты</b></span><span>Стоимость: <b>бесплатно</b></span></div>
+  </header>
+
+  <section>
+    <h2>Что будет приходить</h2>
+    <p class="lead" style="font-size:15px">Пример. Вопросы в сообщении будут точно такими, как в форме.</p>
+    <div class="msg" aria-label="Пример сообщения">
+      <p><b>🌿 Новая заявка · Ретрит в DOMA 2027</b><br>21.11.2026 14:32 (Лиссабон)</p>
+      <p><b>Как тебя зовут?</b><br>Анна Пример</p>
+      <p><b>Telegram</b><br>@anna_example</p>
+      <p><b>Где планируешь жить?</b><br>DOMA · Double Room</p>
+      <p>… и все остальные ответы анкеты</p>
+      <p><a href="#" onclick="return false">Открыть таблицу заявок</a></p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Настройка</h2>
+    <ol class="steps">
+      <li class="step">
+        <h3>Создай бота</h3>
+        <p>В Telegram открой <span class="path">@BotFather</span> → отправь <code>/newbot</code> → придумай имя (например, «Заявки DOMA») и адрес, который заканчивается на <code>bot</code>.</p>
+        <p>BotFather пришлёт <b>токен</b> — длинную строку вида <code>7712345678:AAH…</code>. Скопируй его и никому не пересылай.</p>
+      </li>
+      <li class="step">
+        <h3>Нажми «Start» у своего бота</h3>
+        <p>В том же сообщении BotFather есть ссылка на бота (<code>t.me/…bot</code>). Открой её и нажми <b>Start</b>. Без этого бот не сможет написать тебе первым.</p>
+        <p>Шаги 2 и 6 лучше сделать в один день.</p>
+      </li>
+      <li class="step">
+        <h3>Открой редактор скриптов формы</h3>
+        <p>Открой Google-форму анкеты в режиме редактирования → справа вверху <span class="path">⋮ (три точки) → «Редактор скриптов»</span>. Откроется Apps Script.</p>
+      </li>
+      <li class="step">
+        <h3>Вставь скрипт</h3>
+        <p>В файле <code>Код.gs</code> выдели всё и удали. Скопируй скрипт кнопкой ниже, вставь и нажми значок дискеты «Сохранить».</p>
+        <div class="row"><button type="button" id="copy-script">Скопировать скрипт</button><span class="done" id="copy-script-ok" hidden>Скопировано</span></div>
+        <details><summary>Показать скрипт</summary><pre id="script">/**
+ * Заявки с сайта ретрита → уведомление в Telegram.
+ *
+ * Скрипт вставляется в редактор скриптов Google-формы анкеты
+ * (форма → ⋮ → «Редактор скриптов»). На каждую новую заявку бот присылает
+ * сообщение со всеми ответами и ссылкой на таблицу ответов.
+ *
+ * Настройка — в README.md, раздел «Уведомления о заявках в Telegram».
+ * Токен бота НЕ хранится в этом файле: он вводится в свойствах скрипта
+ * (Настройки проекта → Свойства скрипта → TELEGRAM_TOKEN).
+ */
+
+// Кому слать: Telegram-ник без @. Можно несколько через запятую: 'verak_, ivan'.
+var RECIPIENTS = 'verak_';
+
+var TITLE = '🌿 Новая заявка · Ретрит в DOMA 2027';
+
+/* ---------- 1. Один раз: включить отправку при каждой новой заявке ---------- */
+function setup() {
+  var form = FormApp.getActiveForm();
+  ScriptApp.getProjectTriggers().forEach(function (t) {
+    if (t.getHandlerFunction() === 'onSubmit') ScriptApp.deleteTrigger(t);
+  });
+  ScriptApp.newTrigger('onSubmit').forForm(form).onFormSubmit().create();
+  Logger.log('Готово: уведомления включены для формы «' + form.getTitle() + '».');
+  findChats();
+}
+
+/* ---------- 2. Найти чаты получателей (после того как они нажали Start у бота) ---------- */
+function findChats() {
+  var res = tg_('getUpdates', {});
+  var wanted = names_();
+  var props = PropertiesService.getScriptProperties();
+  var saved = JSON.parse(props.getProperty('CHAT_IDS') || '{}');
+  (res.result || []).forEach(function (u) {
+    var m = u.message || u.my_chat_member || u.edited_message;
+    if (!m || !m.chat) return;
+    var c = m.chat, from = m.from || {};
+    var uname = String(c.username || from.username || '').toLowerCase();
+    Logger.log('Чат ' + c.id + ' · ' + (c.title || [c.first_name, c.last_name].join(' ')) + (uname ? ' · @' + uname : ''));
+    if (wanted.indexOf(uname) !== -1 &amp;&amp; c.type === 'private') saved[uname] = c.id;
+  });
+  props.setProperty('CHAT_IDS', JSON.stringify(saved));
+  wanted.forEach(function (n) {
+    Logger.log(saved[n] ? '✓ @' + n + ' найден(а), чат ' + saved[n]
+                        : '✗ @' + n + ' не найден(а): пусть откроет бота и нажмёт Start, затем запустите findChats ещё раз.');
+  });
+  return saved;
+}
+
+/* ---------- 3. Проверка: отправить последнюю заявку ещё раз ---------- */
+function sendTest() {
+  var all = FormApp.getActiveForm().getResponses();
+  if (!all.length) { Logger.log('В форме пока нет ответов.'); return; }
+  notify_(all[all.length - 1], '🧪 Тест · ');
+}
+
+/* ---------- Срабатывает сам на каждую новую заявку ---------- */
+function onSubmit(e) {
+  notify_(e.response, '');
+}
+
+/* ---------- внутреннее ---------- */
+function notify_(response, prefix) {
+  var form = FormApp.getActiveForm();
+  var parts = ['&lt;b&gt;' + esc_(prefix + TITLE) + '&lt;/b&gt;',
+               esc_(Utilities.formatDate(response.getTimestamp(), 'Europe/Lisbon', 'dd.MM.yyyy HH:mm') + ' (Лиссабон)')];
+
+  response.getItemResponses().forEach(function (ir) {
+    var v = flat_(ir.getResponse());
+    if (!v) return;
+    parts.push('&lt;b&gt;' + esc_(ir.getItem().getTitle()) + '&lt;/b&gt;\n' + esc_(v));
+  });
+
+  try {
+    if (form.getDestinationType() === FormApp.DestinationType.SPREADSHEET) {
+      var url = SpreadsheetApp.openById(form.getDestinationId()).getUrl();
+      parts.push('&lt;a href="' + url + '"&gt;Открыть таблицу заявок&lt;/a&gt;');
+    }
+  } catch (err) { /* таблица не привязана — просто без ссылки */ }
+
+  var chats = chatIds_();
+  if (!chats.length) throw new Error('Нет получателей: запустите findChats после того, как получатель нажал Start у бота.');
+  chunks_(parts, 3800).forEach(function (text) {
+    chats.forEach(function (id) {
+      tg_('sendMessage', { chat_id: id, text: text, parse_mode: 'HTML', disable_web_page_preview: true });
+    });
+  });
+}
+
+function chatIds_() {
+  var saved = JSON.parse(PropertiesService.getScriptProperties().getProperty('CHAT_IDS') || '{}');
+  var missing = names_().some(function (n) { return !saved[n]; });
+  if (missing) saved = findChats();
+  return names_().map(function (n) { return saved[n]; }).filter(Boolean);
+}
+
+function names_() {
+  return RECIPIENTS.split(',').map(function (s) { return s.trim().replace(/^@/, '').toLowerCase(); }).filter(Boolean);
+}
+
+function tg_(method, payload) {
+  var token = PropertiesService.getScriptProperties().getProperty('TELEGRAM_TOKEN');
+  if (!token) throw new Error('Добавьте токен бота: Настройки проекта → Свойства скрипта → TELEGRAM_TOKEN.');
+  var r = UrlFetchApp.fetch('https://api.telegram.org/bot' + token + '/' + method, {
+    method: 'post', contentType: 'application/json', payload: JSON.stringify(payload), muteHttpExceptions: true
+  });
+  var body = JSON.parse(r.getContentText());
+  if (!body.ok) throw new Error('Telegram: ' + body.description);
+  return body;
+}
+
+function flat_(v) {
+  if (v === null || v === undefined) return '';
+  if (Array.isArray(v)) return v.map(flat_).filter(String).join(', ');
+  return String(v).trim();
+}
+
+function esc_(s) {
+  return String(s).replace(/&amp;/g, '&amp;amp;').replace(/&lt;/g, '&amp;lt;').replace(/&gt;/g, '&amp;gt;');
+}
+
+function chunks_(parts, max) {
+  var out = [], cur = '';
+  parts.forEach(function (p) {
+    if (p.length &gt; max) p = p.slice(0, max - 1) + '…';
+    if (cur &amp;&amp; (cur + '\n\n' + p).length &gt; max) { out.push(cur); cur = p; }
+    else cur = cur ? cur + '\n\n' + p : p;
+  });
+  if (cur) out.push(cur);
+  return out;
+}
+</pre></details>
+      </li>
+      <li class="step">
+        <h3>Добавь токен</h3>
+        <p>Слева нажми <span class="path">⚙️ «Настройки проекта»</span> → внизу <span class="path">«Свойства скрипта» → «Изменить свойства скрипта» → «Добавить свойство»</span>.</p>
+        <ul><li>Свойство: <code>TELEGRAM_TOKEN</code> <button type="button" class="ghost" id="copy-key" style="padding:5px 10px;font-size:12px">Скопировать</button></li><li>Значение: токен из шага 1</li></ul>
+        <p>Нажми «Сохранить свойства скрипта».</p>
+      </li>
+      <li class="step">
+        <h3>Включи уведомления</h3>
+        <p>Вернись в редактор (значок <code>&lt;&gt;</code> слева). Вверху в списке функций выбери <code>setup</code> → «Выполнить».</p>
+        <p>Google попросит разрешение — это нормально для своего скрипта: выбери свой аккаунт → «Дополнительные настройки» → «Перейти на страницу проекта» → «Разрешить».</p>
+        <p>Внизу в журнале должно появиться <b>«✓ @verak_ найден(а)»</b>.</p>
+      </li>
+      <li class="step">
+        <h3>Проверь</h3>
+        <p>Выбери функцию <code>sendTest</code> → «Выполнить». В Telegram придёт последняя заявка с пометкой «🧪 Тест». Всё, дальше каждая новая заявка будет приходить сама.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Если что-то не так</h2>
+    <div class="faq">
+      <div><b>В журнале «✗ @verak_ не найден(а)»</b><span>Открой бота, нажми Start (или напиши ему любое сообщение), затем выбери функцию <code>findChats</code> → «Выполнить».</span></div>
+      <div><b>Ошибка «Добавьте токен бота»</b><span>Свойство из шага 5 не сохранилось или называется иначе. Название должно быть ровно <code>TELEGRAM_TOKEN</code>.</span></div>
+      <div><b>Ошибка «Telegram: Unauthorized»</b><span>Токен скопирован не полностью. Возьми его заново у @BotFather командой <code>/mybots</code> → бот → «API Token».</span></div>
+      <div><b>Хочу, чтобы уведомления получал ещё кто-то</b><span>В первой строке скрипта <code>var RECIPIENTS = 'verak_';</code> допиши ник через запятую: <code>'verak_, ник'</code>. Этот человек жмёт Start у бота, затем выполни <code>findChats</code>.</span></div>
+      <div><b>В форме поменяли вопросы</b><span>Ничего делать не нужно: скрипт берёт вопросы прямо из формы.</span></div>
+    </div>
+  </section>
+
+  <p class="note">Заявки по-прежнему сохраняются в Google-форме и таблице. Telegram — это дубль, чтобы сразу видеть новую заявку.</p>
+</div>
+
+<script>
+function copyText(text, okEl, src) {
+  var done = function () { if (okEl) { okEl.hidden = false; setTimeout(function () { okEl.hidden = true; }, 2500); } };
+  var fallback = function () {
+    if (!src) return;
+    var d = src.closest('details'); if (d) d.open = true;
+    var r = document.createRange(); r.selectNodeContents(src);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+  };
+  try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+}
+document.getElementById('copy-script').addEventListener('click', function () {
+  var pre = document.getElementById('script');
+  copyText(pre.textContent, document.getElementById('copy-script-ok'), pre);
+});
+document.getElementById('copy-key').addEventListener('click', function () {
+  var b = this; copyText('TELEGRAM_TOKEN', null, null); b.textContent = 'Скопировано'; setTimeout(function () { b.textContent = 'Скопировать'; }, 2000);
+});
+</script>

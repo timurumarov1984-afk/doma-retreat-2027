@@ -47,7 +47,7 @@ tools/make-hero.sh      — нарезка одного видео для пер
 
 ## Публикация
 
-Сайт опубликован на GitHub Pages: **https://timurumarov1984-afk.github.io/doma-retreat-2027/**
+Сайт опубликован на GitHub Pages: **https://portugal.retreatmaster.online/**
 (репозиторий `timurumarov1984-afk/doma-retreat-2027`).
 
 Чтобы обновить сайт после правок: `git add -A && git commit -m "…" && git push`. Ссылка обновится примерно через минуту.

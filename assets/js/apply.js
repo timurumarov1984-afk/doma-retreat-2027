@@ -13,6 +13,13 @@
     submissionTimestamp: '-1'
   };
   var RULES_URL = 'terms.html';
+
+  /* Копия каждой заявки в Telegram через бота @doma_retreat_bot.
+     TG_CHATS — номера чатов получателей. Человек сначала нажимает Start у бота,
+     потом его номер чата берётся из https://api.telegram.org/bot<токен>/getUpdates.
+     Если токен утёк: @BotFather → /mybots → бот → API Token → Revoke, новый токен вписать сюда. */
+  var TG_TOKEN = '9180609934:AAEzCQAvPFTAU2LamMPyTdbtHDvlAEWA_zI';
+  var TG_CHATS = [];
   var DRAFT_KEY = 'retreat-apply-2027';
 
   var YES_NO = [{ v: 'Да', ru: 'Да', en: 'Yes' }, { v: 'Нет', ru: 'Нет', en: 'No' }];
@@ -360,6 +367,37 @@
     Object.keys(FORM_EXTRA).forEach(function (k) { body.append(k, FORM_EXTRA[k]); });
     return body;
   }
+  function plain(html) {
+    var d = document.createElement('div'); d.innerHTML = html; return d.textContent.replace(/\u00a0/g, ' ');
+  }
+  function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function buildTelegramText() {
+    var now = new Date();
+    var parts = ['<b>🌿 Новая заявка · Ретрит в DOMA 2027</b>\n' +
+      esc(now.toLocaleString('ru-RU', { timeZone: 'Europe/Lisbon', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) + ' (Лиссабон)')];
+    allFields.forEach(function (f) {
+      if (!f.label || f.type === 'fixed' || f.type === 'consent' || !isVisible(f)) return;
+      var v = getValue(f), out = '';
+      if (f.type === 'checkboxes') {
+        out = (v || []).map(function (x) { return x === '__other_option__' ? 'Другое: ' + otherText(f) : x; }).join(', ');
+      } else if (f.type === 'dates') {
+        out = v ? fmtDate(v.a) + ' – ' + fmtDate(v.d) : '';
+      } else out = v || '';
+      if (out) parts.push('<b>' + esc(plain(f.label.ru)) + '</b>\n' + esc(out));
+    });
+    parts.push('<i>Анкета заполнена на ' + (root.getAttribute('data-lang') === 'en' ? 'английском' : 'русском') + '. Ответы также сохранены в Google-форме.</i>');
+    var text = parts.join('\n\n');
+    return text.length > 4000 ? text.slice(0, 3990) + '…' : text;
+  }
+  function sendTelegram() {
+    if (!TG_TOKEN || !TG_CHATS.length) return Promise.resolve();
+    var text = buildTelegramText();
+    return Promise.all(TG_CHATS.map(function (id) {
+      var body = new URLSearchParams({ chat_id: id, text: text, parse_mode: 'HTML', disable_web_page_preview: 'true' });
+      return fetch('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage', { method: 'POST', mode: 'no-cors', body: body })
+        .catch(function () { /* Telegram недоступен — заявка всё равно ушла в Google-форму */ });
+    }));
+  }
   var states = { success: $('.form-state--success'), error: $('.form-state--error') };
   function showState(name) {
     form.hidden = !!name;
@@ -378,7 +416,9 @@
     var btn = form.querySelector('[data-submit]');
     btn.disabled = true;
     btn.innerHTML = L(UI.sending);
+    var tg = sendTelegram();
     fetch(FORM_ACTION, { method: 'POST', mode: 'no-cors', body: buildBody() })
+      .then(function (r) { return tg.then(function () { return r; }); })
       .then(function () {
         try { localStorage.removeItem(DRAFT_KEY); } catch (e) { /* ignore */ }
         showState('success');

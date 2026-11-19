@@ -75,7 +75,7 @@
       fields: [
         { name: 'dates', entry: '1700040031', type: 'dates', required: true,
           label: { ru: 'Когда приедешь и&nbsp;уедешь?', en: 'When will you arrive and leave?' },
-          hint: { ru: 'Ретрит идёт с&nbsp;9 по&nbsp;18 мая 2027: заезд 9 мая с&nbsp;14:00, выезд 18 мая до&nbsp;12:00', en: 'The retreat runs 9–18 May 2027: check-in on 9 May from 14:00, check-out on 18 May by 12:00' } },
+          hint: { ru: 'Практики с&nbsp;10 по&nbsp;17 мая 2027. Заезд 9 мая с&nbsp;14:00 (вечером приветственный ужин), выезд 18 мая до&nbsp;12:00', en: 'Sessions run 10–17 May 2027. Check-in on 9 May from 14:00 (welcome dinner that evening), check-out on 18 May by 12:00' } },
         { name: 'stay', entry: '1508398290', type: 'cards', required: true,
           label: { ru: 'Планируешь жить в&nbsp;DOMA?', en: 'Are you planning to stay at DOMA?' },
           options: [{ v: 'Да, хочу забронировать номер в Doma', ru: 'Да, хочу забронировать номер в&nbsp;DOMA', en: 'Yes, I’d like to book a room at DOMA' },
@@ -424,8 +424,8 @@
 
   /* ---------- language ---------- */
   var TITLES = {
-    ru: 'Анкета участника · Ретрит с Мастером в DOMA · 9–18 мая 2027',
-    en: 'Application · Retreat with the Master at DOMA · 9–18 May 2027'
+    ru: 'Анкета участника · Ретрит с Мастером в DOMA · 10–17 мая 2027',
+    en: 'Application · Retreat with the Master at DOMA · 10–17 May 2027'
   };
   function applyLang(lang) {
     if (!TITLES[lang]) lang = 'ru';

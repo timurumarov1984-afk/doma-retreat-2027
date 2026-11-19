@@ -4,12 +4,12 @@
 (function () {
   'use strict';
 
-  var FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLScufP0JZy3R-6JEgpHcbot98bKMqCGhywQrjM5NU0Y8SmFUuQ/formResponse';
+  var FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSephoLCFd_MAbrCuToPdXbkgKLxS4wygOK6Ih4fp9VN5CNEMQ/formResponse';
   var FORM_EXTRA = {
     fvv: '1',
     pageHistory: '0,1,2,3,4',
-    fbzx: '-2259008623288397407',
-    partialResponse: '[null,null,"-2259008623288397407"]',
+    fbzx: '-6617028220897662908',
+    partialResponse: '[null,null,"-6617028220897662908"]',
     submissionTimestamp: '-1'
   };
   var RULES_URL = 'terms.html';
@@ -40,17 +40,13 @@
         { name: 'telegram', entry: '1962739531', type: 'text', required: true,
           label: { ru: 'Telegram для связи', en: 'Telegram' },
           hint: { ru: 'Ник (например, @username) или номер телефона', en: 'Username (e.g. @username) or phone number' },
-          placeholder: { ru: '@username', en: '@username' } },
-        { name: 'source', entry: '1600217376', type: 'textarea', required: true,
-          label: { ru: 'Откуда ты знаешь о&nbsp;ретрите с&nbsp;Мастером?', en: 'How did you hear about the retreat with the Master?' } }
+          placeholder: { ru: '@username', en: '@username' } }
       ]
     },
     {
       title: { ru: 'Опыт практики', en: 'Your practice' },
       intro: { ru: 'Это поможет нам лучше подготовиться к&nbsp;встрече.', en: 'This helps us prepare for meeting you.' },
       fields: [
-        // формат один — ретрит в DOMA; поле обязательно в Google-форме, поэтому отправляем значение автоматически
-        { name: 'format', entry: '1453769740', type: 'fixed', value: 'Оффлайн' },
         { name: 'offline', entry: '561608447', type: 'radio', required: true, options: YES_NO,
           label: { ru: 'Есть ли у тебя опыт очных ретритов с&nbsp;Мастером?', en: 'Have you been to in-person retreats with the Master?' } },
         { name: 'offlineTimes', entry: '1333758775', type: 'radio', required: true, options: TIMES,
@@ -95,16 +91,6 @@
       fields: [
         { name: 'activitiesWanted', entry: '2093172798', type: 'radio', required: false, options: YES_NO,
           label: { ru: 'Интересны совместные активности, которые можно организовать заранее?', en: 'Interested in shared activities we can arrange in advance?' } },
-        { name: 'activities', entry: '157482944', type: 'checkboxes', required: false,
-          showIf: { name: 'activitiesWanted', value: 'Да' },
-          label: { ru: 'Какие активности тебе интересны?', en: 'Which activities interest you?' },
-          options: [{ v: 'Хайкинг в заповеднике Тапада де Марфа', ru: 'Хайкинг в&nbsp;Тапада-де-Мафра', en: 'Hiking in Tapada de Mafra' },
-                    { v: 'Банная церемония в центре ATMOS', ru: 'Банная церемония в&nbsp;ATMOS', en: 'Bath ceremony at ATMOS' },
-                    { v: 'Поездки на океан', ru: 'Поездки на&nbsp;океан', en: 'Trips to the ocean' },
-                    { v: 'Саундхилинг', en: 'Sound healing' },
-                    { v: 'Посещение Ки́нта да Регале́йра', ru: 'Кинта-да-Регалейра', en: 'Quinta da Regaleira' },
-                    { v: 'Предложу свой вариант в чате', ru: 'Предложу свой вариант в&nbsp;чате', en: 'I’ll suggest my own in the chat' }],
-          other: { ru: 'Другое', en: 'Other' } },
         { name: 'propose', entry: '1874340831', type: 'textarea', required: false,
           label: { ru: 'Хочешь предложить или провести какую-то активность?', en: 'Would you like to offer or lead an activity?' },
           hint: { ru: 'Коротко: что это и&nbsp;с&nbsp;чем нужна помощь', en: 'Briefly: what it is and what help you need' } },

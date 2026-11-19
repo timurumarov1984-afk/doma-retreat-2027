@@ -9,11 +9,11 @@
   var META = {
     ru: {
       title: 'Ретрит с Мастером Камильпашой в DOMA · 9–17 мая 2027 · Португалия',
-      desc: 'Девять дней утренних и вечерних медитаций с Мастером Камильпашой в DOMA — сосновый лес в 30 минутах от Лиссабона и в 20 минутах от океана. 9–17 мая 2027.'
+      desc: 'Семь дней утренних и вечерних медитаций с Мастером Камильпашой в DOMA — сосновый лес в 30 минутах от Лиссабона и в 20 минутах от океана. 9–17 мая 2027.'
     },
     en: {
       title: 'Retreat with Master Kamilpasha at DOMA · 9–17 May 2027 · Portugal',
-      desc: 'Nine days of morning and evening meditation with Master Kamilpasha at DOMA — a pine forest 30 minutes from Lisbon and 20 minutes from the ocean. 9–17 May 2027.'
+      desc: 'Seven days of morning and evening meditation with Master Kamilpasha at DOMA — a pine forest 30 minutes from Lisbon and 20 minutes from the ocean. 9–17 May 2027.'
     }
   };
   var metaDesc = document.querySelector('meta[name="description"]');

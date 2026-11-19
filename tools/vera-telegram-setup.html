@@ -60,7 +60,7 @@ pre { margin: 12px 0 0; max-height: 360px; overflow: auto; background: var(--cod
   <header>
     <p class="kicker">Ретрит в DOMA · 9–18 мая 2027</p>
     <h1>Заявки с сайта — сразу в Telegram</h1>
-    <p class="lead">Вера, это инструкция для тебя. После настройки на каждую новую заявку с сайта ретрита тебе в Telegram будет приходить сообщение со всеми ответами анкеты и ссылкой на таблицу. Делается один раз, минут 10–15, с компьютера.</p>
+    <p class="lead">Вера, это инструкция для тебя. После настройки на каждую новую заявку с сайта ретрита тебе в Telegram будет приходить сообщение со всеми ответами анкеты и ссылкой на таблицу. Делается один раз, минут 5, с компьютера.</p>
     <div class="meta"><span>Получатель: <b>@verak_</b></span><span>Источник: <b>Google-форма анкеты</b></span><span>Стоимость: <b>бесплатно</b></span></div>
   </header>
 
@@ -81,22 +81,16 @@ pre { margin: 12px 0 0; max-height: 360px; overflow: auto; background: var(--cod
     <h2>Настройка</h2>
     <ol class="steps">
       <li class="step">
-        <h3>Создай бота</h3>
-        <p>В Telegram открой <span class="path">@BotFather</span> → отправь <code>/newbot</code> → придумай имя (например, «Заявки DOMA») и адрес, который заканчивается на <code>bot</code>.</p>
-        <p>BotFather пришлёт <b>токен</b> — длинную строку вида <code>7712345678:AAH…</code>. Скопируй его и никому не пересылай.</p>
-      </li>
-      <li class="step">
-        <h3>Нажми «Start» у своего бота</h3>
-        <p>В том же сообщении BotFather есть ссылка на бота (<code>t.me/…bot</code>). Открой её и нажми <b>Start</b>. Без этого бот не сможет написать тебе первым.</p>
-        <p>Шаги 2 и 6 лучше сделать в один день.</p>
+        <h3>Нажми «Start» у бота</h3>
+        <p>Открой ссылку на бота заявок, которую тебе пришлют, и нажми <b>Start</b>. Это правило Telegram: бот не может написать человеку первым.</p>
       </li>
       <li class="step">
         <h3>Открой редактор скриптов формы</h3>
         <p>Открой Google-форму анкеты в режиме редактирования → справа вверху <span class="path">⋮ (три точки) → «Редактор скриптов»</span>. Откроется Apps Script.</p>
       </li>
       <li class="step">
-        <h3>Вставь скрипт</h3>
-        <p>В файле <code>Код.gs</code> выдели всё и удали. Скопируй скрипт кнопкой ниже, вставь и нажми значок дискеты «Сохранить».</p>
+        <h3>Вставь скрипт и токен</h3>
+        <p>В файле <code>Код.gs</code> выдели всё и удали. Скопируй скрипт кнопкой ниже и вставь.</p>
         <div class="row"><button type="button" id="copy-script">Скопировать скрипт</button><span class="done" id="copy-script-ok" hidden>Скопировано</span></div>
         <details><summary>Показать скрипт</summary><pre id="script">/**
  * Заявки с сайта ретрита → уведомление в Telegram.
@@ -106,9 +100,12 @@ pre { margin: 12px 0 0; max-height: 360px; overflow: auto; background: var(--cod
  * сообщение со всеми ответами и ссылкой на таблицу ответов.
  *
  * Настройка — в README.md, раздел «Уведомления о заявках в Telegram».
- * Токен бота НЕ хранится в этом файле: он вводится в свойствах скрипта
- * (Настройки проекта → Свойства скрипта → TELEGRAM_TOKEN).
+ * Токен бота вставляется в строку BOT_TOKEN ниже — только в редакторе скриптов
+ * Google-формы. В этот файл на сайте токен не вписывать: сайт виден всем.
  */
+
+// Токен бота от @BotFather — вставить между кавычками.
+var BOT_TOKEN = '';
 
 // Кому слать: Telegram-ник без @. Можно несколько через запятую: 'verak_, ivan'.
 var RECIPIENTS = 'verak_';
@@ -200,8 +197,8 @@ function names_() {
 }
 
 function tg_(method, payload) {
-  var token = PropertiesService.getScriptProperties().getProperty('TELEGRAM_TOKEN');
-  if (!token) throw new Error('Добавьте токен бота: Настройки проекта → Свойства скрипта → TELEGRAM_TOKEN.');
+  var token = BOT_TOKEN || PropertiesService.getScriptProperties().getProperty('TELEGRAM_TOKEN');
+  if (!token) throw new Error('Добавьте токен бота: вставьте его между кавычками в строке BOT_TOKEN в начале скрипта.');
   var r = UrlFetchApp.fetch('https://api.telegram.org/bot' + token + '/' + method, {
     method: 'post', contentType: 'application/json', payload: JSON.stringify(payload), muteHttpExceptions: true
   });
@@ -231,16 +228,11 @@ function chunks_(parts, max) {
   return out;
 }
 </pre></details>
-      </li>
-      <li class="step">
-        <h3>Добавь токен</h3>
-        <p>Слева нажми <span class="path">⚙️ «Настройки проекта»</span> → внизу <span class="path">«Свойства скрипта» → «Изменить свойства скрипта» → «Добавить свойство»</span>.</p>
-        <ul><li>Свойство: <code>TELEGRAM_TOKEN</code> <button type="button" class="ghost" id="copy-key" style="padding:5px 10px;font-size:12px">Скопировать</button></li><li>Значение: токен из шага 1</li></ul>
-        <p>Нажми «Сохранить свойства скрипта».</p>
+        <p style="margin-top:12px">Найди в начале строку <code>var BOT_TOKEN = '';</code> и вставь между кавычками токен бота, который тебе пришлют отдельно. Должно получиться <code>var BOT_TOKEN = '123…:AA…';</code>. Нажми значок дискеты «Сохранить».</p>
       </li>
       <li class="step">
         <h3>Включи уведомления</h3>
-        <p>Вернись в редактор (значок <code>&lt;&gt;</code> слева). Вверху в списке функций выбери <code>setup</code> → «Выполнить».</p>
+        <p>Вверху в списке функций выбери <code>setup</code> → «Выполнить».</p>
         <p>Google попросит разрешение — это нормально для своего скрипта: выбери свой аккаунт → «Дополнительные настройки» → «Перейти на страницу проекта» → «Разрешить».</p>
         <p>Внизу в журнале должно появиться <b>«✓ @verak_ найден(а)»</b>.</p>
       </li>
@@ -255,8 +247,8 @@ function chunks_(parts, max) {
     <h2>Если что-то не так</h2>
     <div class="faq">
       <div><b>В журнале «✗ @verak_ не найден(а)»</b><span>Открой бота, нажми Start (или напиши ему любое сообщение), затем выбери функцию <code>findChats</code> → «Выполнить».</span></div>
-      <div><b>Ошибка «Добавьте токен бота»</b><span>Свойство из шага 5 не сохранилось или называется иначе. Название должно быть ровно <code>TELEGRAM_TOKEN</code>.</span></div>
-      <div><b>Ошибка «Telegram: Unauthorized»</b><span>Токен скопирован не полностью. Возьми его заново у @BotFather командой <code>/mybots</code> → бот → «API Token».</span></div>
+      <div><b>Ошибка «Добавьте токен бота»</b><span>Токен не вставлен в строку <code>var BOT_TOKEN = '';</code> или скрипт не сохранён.</span></div>
+      <div><b>Ошибка «Telegram: Unauthorized»</b><span>Токен скопирован не полностью или с лишними пробелами. Попроси прислать его ещё раз.</span></div>
       <div><b>Хочу, чтобы уведомления получал ещё кто-то</b><span>В первой строке скрипта <code>var RECIPIENTS = 'verak_';</code> допиши ник через запятую: <code>'verak_, ник'</code>. Этот человек жмёт Start у бота, затем выполни <code>findChats</code>.</span></div>
       <div><b>В форме поменяли вопросы</b><span>Ничего делать не нужно: скрипт берёт вопросы прямо из формы.</span></div>
     </div>
@@ -279,8 +271,5 @@ function copyText(text, okEl, src) {
 document.getElementById('copy-script').addEventListener('click', function () {
   var pre = document.getElementById('script');
   copyText(pre.textContent, document.getElementById('copy-script-ok'), pre);
-});
-document.getElementById('copy-key').addEventListener('click', function () {
-  var b = this; copyText('TELEGRAM_TOKEN', null, null); b.textContent = 'Скопировано'; setTimeout(function () { b.textContent = 'Скопировать'; }, 2000);
 });
 </script>

@@ -6,9 +6,12 @@
  * сообщение со всеми ответами и ссылкой на таблицу ответов.
  *
  * Настройка — в README.md, раздел «Уведомления о заявках в Telegram».
- * Токен бота НЕ хранится в этом файле: он вводится в свойствах скрипта
- * (Настройки проекта → Свойства скрипта → TELEGRAM_TOKEN).
+ * Токен бота вставляется в строку BOT_TOKEN ниже — только в редакторе скриптов
+ * Google-формы. В этот файл на сайте токен не вписывать: сайт виден всем.
  */
+
+// Токен бота от @BotFather — вставить между кавычками.
+var BOT_TOKEN = '';
 
 // Кому слать: Telegram-ник без @. Можно несколько через запятую: 'verak_, ivan'.
 var RECIPIENTS = 'verak_';
@@ -100,8 +103,8 @@ function names_() {
 }
 
 function tg_(method, payload) {
-  var token = PropertiesService.getScriptProperties().getProperty('TELEGRAM_TOKEN');
-  if (!token) throw new Error('Добавьте токен бота: Настройки проекта → Свойства скрипта → TELEGRAM_TOKEN.');
+  var token = BOT_TOKEN || PropertiesService.getScriptProperties().getProperty('TELEGRAM_TOKEN');
+  if (!token) throw new Error('Добавьте токен бота: вставьте его между кавычками в строке BOT_TOKEN в начале скрипта.');
   var r = UrlFetchApp.fetch('https://api.telegram.org/bot' + token + '/' + method, {
     method: 'post', contentType: 'application/json', payload: JSON.stringify(payload), muteHttpExceptions: true
   });

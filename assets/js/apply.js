@@ -12,7 +12,7 @@
     partialResponse: '[null,null,"-2259008623288397407"]',
     submissionTimestamp: '-1'
   };
-  var RULES_URL = 'https://docs.google.com/document/d/12V9Uu-iSyLV4jjdPl43FUXit8KJJa4iMa1bMrvaR1z4/edit?usp=sharing';
+  var RULES_URL = 'terms.html';
   var DRAFT_KEY = 'retreat-apply-2027';
 
   var YES_NO = [{ v: 'Да', ru: 'Да', en: 'Yes' }, { v: 'Нет', ru: 'Нет', en: 'No' }];

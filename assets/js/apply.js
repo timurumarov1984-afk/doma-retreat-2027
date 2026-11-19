@@ -19,7 +19,7 @@
      потом его номер чата берётся из https://api.telegram.org/bot<токен>/getUpdates.
      Если токен утёк: @BotFather → /mybots → бот → API Token → Revoke, новый токен вписать сюда. */
   var TG_TOKEN = '9180609934:AAEzCQAvPFTAU2LamMPyTdbtHDvlAEWA_zI';
-  var TG_CHATS = [];
+  var TG_CHATS = [121004964]; // @verak (Вера)
   var DRAFT_KEY = 'retreat-apply-2027';
 
   var YES_NO = [{ v: 'Да', ru: 'Да', en: 'Yes' }, { v: 'Нет', ru: 'Нет', en: 'No' }];

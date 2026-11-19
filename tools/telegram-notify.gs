@@ -14,7 +14,7 @@
 var BOT_TOKEN = '';
 
 // Кому слать: Telegram-ник без @. Можно несколько через запятую: 'verak_, ivan'.
-var RECIPIENTS = 'verak_';
+var RECIPIENTS = 'verak';
 
 var TITLE = '🌿 Новая заявка · Ретрит в DOMA 2027';
 
